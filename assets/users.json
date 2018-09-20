@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Pavel",
+    "password": "1111",
+    "dateOfBirth": "2011-10-05T00:00:00.000Z",
+    "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
+    "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
+    "information": "meaw"
+  },
+  {
+    "id": 2,
+    "name": "Pavel",
+    "password": "1111",
+    "dateOfBirth": "2011-10-05T00:00:00.000Z",
+    "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
+    "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
+    "information": "meaw"
+  },
+  {
+    "id": 3,
+    "name": "Pavel",
+    "password": "1111",
+    "dateOfBirth": "2011-10-05T00:00:00.000Z",
+    "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
+    "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
+    "information": "meaw"
+  }
+]

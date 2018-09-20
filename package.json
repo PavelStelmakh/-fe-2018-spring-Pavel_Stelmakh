@@ -1,0 +1,20 @@
+{
+  "name": "-fe-2018-spring-Pavel_Stelmakh",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "repository": "https://github.com/PavelStelmakh/-fe-2018-spring-Pavel_Stelmakh.git",
+  "author": "Pavel Stelmakh <pavelstelmax@rambler.ru>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/app.js"
+  },
+  "dependencies": {
+    "@types/body-parser": "1.17.0",
+    "@types/express": "4.16.0",
+    "body-parser": "1.18.3",
+    "express": "4.16.3",
+    "lodash": "4.17.11",
+    "typescript": "3.0.3"
+  }
+}
