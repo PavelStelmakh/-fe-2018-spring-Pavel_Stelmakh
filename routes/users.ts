@@ -1,14 +1,15 @@
-import * as express from 'express';
-const router = express.Router();
+// import * as express from 'express';
+import { Router, Request, Response } from 'express';
+const router = Router();
 import { User } from '../models/User';
 const Users = require('../models/Users');
 const users = new Users;
 
-router.get('/users', (req: express.Request, res: express.Response) => {
+router.get('/users', (req: Request, res: Response) => {
     res.status(200).send(users.users());
 });
 
-router.get('/users/:id', (req: express.Request, res: express.Response) => {
+router.get('/users/:id', (req: Request, res: Response) => {
     try {
         const id: number = +req.params['id'];
         const user: User | undefined = users.user(id);
@@ -25,7 +26,7 @@ router.get('/users/:id', (req: express.Request, res: express.Response) => {
     }
 });
 
-router.post('/users/add', (req: express.Request, res: express.Response) => {
+router.post('/users/add', (req: Request, res: Response) => {
     try {
         const success: boolean = users.add(req.body);
         if (success) {
@@ -40,7 +41,7 @@ router.post('/users/add', (req: express.Request, res: express.Response) => {
     res.end();
 });
 
-router.put('/users/:id', (req: express.Request, res: express.Response) => {
+router.put('/users/:id', (req: Request, res: Response) => {
     try {
         const id: number = +req.params['id'];
         const success: boolean = users.update(id, req.body);
@@ -56,7 +57,7 @@ router.put('/users/:id', (req: express.Request, res: express.Response) => {
     res.end();
 });
 
-router.delete('/users/:id', (req: express.Request, res: express.Response) => {
+router.delete('/users/:id', (req: Request, res: Response) => {
     try {
         const id: number = +req.params['id'];
         const success: boolean = users.delete(id);

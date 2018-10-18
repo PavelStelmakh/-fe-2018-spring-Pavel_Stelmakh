@@ -1,0 +1,16 @@
+:host {
+    color: #ccc;
+    display: block;
+    width: 450px;
+    margin: 0 auto;
+}
+
+span {
+    display: inline-block;
+    font-size: 1.1rem;
+    width: 225px;
+}
+
+div > div {
+    margin-top: 10px;
+}

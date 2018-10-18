@@ -1,5 +1,4 @@
 export class User {
-
 	constructor(public id: number,
 				public name: string,
 				public password: string,
@@ -8,5 +7,4 @@ export class User {
 				public dateOfNextNotif: string = new Date().toISOString(),
 				public information: string | null = null) {
 	}
-
 }

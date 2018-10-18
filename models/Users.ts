@@ -1,6 +1,6 @@
 const users = require('../../assets/users.json');
 import { User } from './User';
-const _ = require('lodash');
+const { has } = require('lodash');
 
 interface IUser {
     name: string,
@@ -58,7 +58,7 @@ class Users {
         try {
             const property: string[] = ['name', 'password', 'dateOfBirth', 'dateOfFirstLogin', 'dateOfNextNotif', 'information'];
             property.forEach(key => {
-                if(!_.has(data, key)) throw Error;
+                if(!has(data, key)) throw Error;
             });
             const checkDateOfBirth = new Date(data.dateOfBirth);
             const checkDateOfFirstLogin = new Date(data.dateOfFirstLogin);//check for conversion to a date object

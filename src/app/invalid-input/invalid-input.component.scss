@@ -1,0 +1,28 @@
+$background_error: #fa5655;
+$background_success: #00c968;
+
+:host {
+    display: block;
+    position: absolute;
+    width: 450px;
+    margin-left: 25px;
+    margin-top: 5px;
+    font-family: Verdana;
+}
+
+div {
+    height: 50px;        
+    line-height: 25px;
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.success {
+    background-color: $background_success;    
+    line-height: 50px;
+}
+
+.error {
+    background-color: $background_error;
+}
