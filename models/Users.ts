@@ -32,8 +32,6 @@ class Users {
             const idArray: number[] = this._users.map(user => user.id);
             id = Math.max(...idArray) + 1;
         }
-        // const user: User = new User(id, data.name, data.password, data.dateOfBirth,
-        //     data.dateOfFirstLogin, data.dateOfNextNotif, data.information);
         data.id = id;
         this._users.push({...data});
         return true;
