@@ -1,7 +1,6 @@
-// import * as express from 'express';
 import { Router, Request, Response } from 'express';
 const router = Router();
-import { User } from '../models/User';
+import { IUser } from '../models/IUser';
 const Users = require('../models/Users');
 const users = new Users;
 
@@ -12,7 +11,7 @@ router.get('/users', (req: Request, res: Response) => {
 router.get('/users/:id', (req: Request, res: Response) => {
     try {
         const id: number = +req.params['id'];
-        const user: User | undefined = users.user(id);
+        const user: IUser | undefined = users.user(id);
         if (user) {
             res.status(200).send(user);
         } else {

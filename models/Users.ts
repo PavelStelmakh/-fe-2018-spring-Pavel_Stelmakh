@@ -1,34 +1,24 @@
 const users = require('../../assets/users.json');
-import { User } from './User';
+import { IUser } from './IUser';
 const { has } = require('lodash');
 
-interface IUser {
-    name: string,
-    password: string,
-    dateOfBirth: string,
-    dateOfFirstLogin: string,
-    dateOfNextNotif: string,
-    information: string | null
-}
-
-
 class Users {
-    private _users: User[] = users || [];
+    private _users: IUser[] = users || [];
 
-    users(): User[] {
+    users(): IUser[] {
         return this._users;
     }
 
-    user(id: number): User | undefined {
-        return this._users.find((user: User) => user.id === id);
+    user(id: number): IUser | undefined {
+        return this._users.find((user: IUser) => user.id === id);
     }
 
     update(id: number, data: IUser): boolean {
         if(!this._users.length) return false;
-        if (!this._users.some((user: User) => user.id === id)
+        if (!this._users.some((user: IUser) => user.id === id)
             || !data
             || !this.check(data)) return false;
-        const index: number = this._users.findIndex((user: User) => user.id === id);
+        const index: number = this._users.findIndex((user: IUser) => user.id === id);
         this._users[index] = { id, ...data};
         return true;
     }
@@ -42,15 +32,16 @@ class Users {
             const idArray: number[] = this._users.map(user => user.id);
             id = Math.max(...idArray) + 1;
         }
-        const user: User = new User(id, data.name, data.password, data.dateOfBirth,
-            data.dateOfFirstLogin, data.dateOfNextNotif, data.information);
-        this._users.push(user);
+        // const user: User = new User(id, data.name, data.password, data.dateOfBirth,
+        //     data.dateOfFirstLogin, data.dateOfNextNotif, data.information);
+        data.id = id;
+        this._users.push({...data});
         return true;
     }
 
     delete(id: number): boolean {
-        if (!this._users.some((user: User) => user.id === id)) return false;
-        this._users = this._users.filter((user: User) => user.id !== id);
+        if (!this._users.some((user: IUser) => user.id === id)) return false;
+        this._users = this._users.filter((user: IUser) => user.id !== id);
         return true;
     }
 
