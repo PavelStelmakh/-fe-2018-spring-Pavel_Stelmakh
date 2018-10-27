@@ -1,52 +1,70 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div>
         <label>
-            <span>Your name</span>
-            <input type="text" placeholder="Anna Maria" formControlName="username">
+            <span>{{'user-details.user-form.name' | translate}}</span>
+            <input type="text" placeholder="Anna Maria" formControlName="name">
         </label>
-        <div class="loading" *ngIf="username.status === 'PENDING'">loading...</div>
-        <app-invalid-input *ngIf="(username.dirty || username.touched) && (username.errors?.username || username.status === 'VALID')" 
-        message="{{ username.status === 'VALID' ? messageList.success : messageList.username }}"
-        type="{{ username.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+        <div class="loading" *ngIf="name.dirty && name.status === 'PENDING'">loading...</div>
+        <app-invalid-input *ngIf="name.dirty && name.status === 'VALID'" 
+        message="{{'user-details.user-form.messages.success' | translate}}"
+        type="success"></app-invalid-input>
+        <app-invalid-input *ngIf="name.dirty && (name.errors?.name || name.errors?.checkExistName)" 
+        message="{{ name.errors?.name ? ('user-details.user-form.messages.name' | translate) 
+        : ('user-details.user-form.messages.existname' | translate) }}"
+        type="error"></app-invalid-input>
     </div>
     <div>
         <label>
-            <span>Your age</span>
-            <input type="text" formControlName="userage" placeholder="18-65">
+            <span>{{'user-details.user-form.age' | translate}}</span>
+            <input type="text" formControlName="age" placeholder="18-65">
         </label>
-        <app-invalid-input *ngIf="(userage.dirty || userage.touched) && (userage.errors?.userage || userage.status === 'VALID')" 
-        message="{{ userage.status === 'VALID' ? messageList.success : messageList.userage }}"
-        type="{{ userage.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+        <app-invalid-input *ngIf="age.dirty && (age.errors?.age || age.status === 'VALID')" 
+        message="{{ age.status === 'VALID' ? ('user-details.user-form.messages.success' | translate)
+        : ('user-details.user-form.messages.age' | translate) }}"
+        type="{{ age.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
     </div>
     <div>
         <label>
-            <span>Your birthday</span>
-            <input type="text" formControlName="birthday" placeholder="YYYY/MM/DD">
+            <span>{{'user-details.user-form.birthday' | translate}}</span>
+            <input type="text" formControlName="dateOfBirth" placeholder="YYYY/MM/DD">
         </label>
-        <app-invalid-input *ngIf="(birthday.dirty || birthday.touched) && (birthday.errors?.date || birthday.status === 'VALID')" 
-        message="{{ birthday.status === 'VALID' ? messageList.success : messageList.birthday }}"
-        type="{{ birthday.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+        <app-invalid-input *ngIf="dateOfBirth.dirty && (dateOfBirth.errors?.date || dateOfBirth.status === 'VALID')" 
+        message="{{ dateOfBirth.status === 'VALID' ? ('user-details.user-form.messages.success' | translate) 
+        : ('user-details.user-form.messages.dateOfBirth' | translate) }}"
+        type="{{ dateOfBirth.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
     </div>
     <div>
         <label>
-            <span>Date of login</span>
-            <input type="text" formControlName="dateOfLogin" placeholder="DD MMMM YYYY">
+            <span>{{'user-details.user-form.dateOfLogin' | translate}}</span>
+            <input type="text" formControlName="dateOfFirstLogin" placeholder="DD MMMM YYYY">
         </label>
         <app-invalid-input 
-        *ngIf="(dateOfLogin.dirty || dateOfLogin.touched) && (dateOfLogin.errors?.date || dateOfLogin.status === 'VALID')" 
-        message="{{ dateOfLogin.status === 'VALID' ? messageList.success : messageList.dateOfLogin }}"
-        type="{{ dateOfLogin.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+        *ngIf="dateOfFirstLogin.dirty && (dateOfFirstLogin.errors?.date || dateOfFirstLogin.status === 'VALID')" 
+        message="{{ dateOfFirstLogin.status === 'VALID' ? ('user-details.user-form.messages.success' | translate) 
+        : ('user-details.user-form.messages.dateOfFirstLogin' | translate) }}"
+        type="{{ dateOfFirstLogin.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
     </div>
     <div>
         <label>
-            <span>Date of notification</span>
-            <input type="text" formControlName="DateOfNotification" placeholder="DD-MMM-YY">
+            <span>{{'user-details.user-form.information' | translate}}</span>
+            <input type="text" formControlName="information">
         </label>
         <app-invalid-input 
-        *ngIf="(DateOfNotification.dirty || DateOfNotification.touched) 
-        && (DateOfNotification.errors?.date || DateOfNotification.status === 'VALID')" 
-        message="{{ DateOfNotification.status === 'VALID' ? messageList.success : messageList.DateOfNotification }}"
-        type="{{ DateOfNotification.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+        *ngIf="information.dirty && (information.errors?.information || information.status === 'VALID')" 
+        message="{{ information.status === 'VALID' ? ('user-details.user-form.messages.success' | translate) 
+        : ('user-details.user-form.messages.information' | translate) }}"
+        type="{{ information.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
     </div>
-    <input type="submit" [disabled]="userForm.status !== 'VALID'">
+    <div>
+        <label>
+            <span>{{'user-details.user-form.dateOfNotification' | translate}}</span>
+            <input type="text" formControlName="dateOfNextNotif" placeholder="DD-MMM-YY">
+        </label>
+        <app-invalid-input 
+        *ngIf="dateOfNextNotif.dirty && (dateOfNextNotif.errors?.date || dateOfNextNotif.status === 'VALID')" 
+        message="{{ dateOfNextNotif.status === 'VALID' ? ('user-details.user-form.messages.success' | translate) 
+        : ('user-details.user-form.messages.dateOfNextNotif' | translate) }}"
+        type="{{ dateOfNextNotif.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+    </div>
+    <input type="submit" [disabled]="userForm.pristine || userForm.status !== 'VALID'" value="{{'user-details.user-form.submit' | translate}}">
 </form>

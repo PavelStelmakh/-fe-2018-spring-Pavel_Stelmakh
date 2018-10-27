@@ -1,6 +1,13 @@
-<h3>
-    {{title}}
-</h3>
-<app-user-form (submitForm)="onSubmit($event)"></app-user-form>
-<app-output-form [formValue]="formValue"></app-output-form>
+<app-popup>Saving...</app-popup>
+<div>
+    <h3>
+        {{'title' | translate}}
+    </h3>
+    <div [class.switchLang]="true">
+        <button (click)="switchLang('en')">en</button>
+        <button (click)="switchLang('ru')">ru</button>
+    </div>
+</div>
+<router-outlet></router-outlet>
+
 

@@ -1,0 +1,11 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="wrongData">{{'login.wrongData' | translate}}</div>
+  <div *ngIf="login.dirty && login.errors?.checkExistName">{{ 'login.notFound' | translate }}</div>
+  <div class="loading" *ngIf="login.dirty && login.status === 'PENDING'">loading...</div>
+  <input type="text" placeholder="login" formControlName="login">
+  <input type="password" placeholder="password" formControlName="password">
+  <div [class.singIn]="true">
+    <input type="submit" [disabled]="loginForm.pristine || loginForm.status !== 'VALID'" value="{{'login.singnIn' | translate}}">
+    <a routerLink="/login/recovery">{{'login.fogotPassword' | translate}}</a>
+  </div>
+</form>

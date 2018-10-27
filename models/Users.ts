@@ -1,6 +1,10 @@
 const users = require('../../assets/users.json');
 import { IUser } from './IUser';
+import { IUserAuth } from './IUserAuth';
+import { ISignIn } from './ISignIn';
+import { IRecovery } from './IRecovery';
 const { has } = require('lodash');
+import * as moment  from 'moment';
 
 class Users {
     private _users: IUser[] = users || [];
@@ -19,8 +23,58 @@ class Users {
             || !data
             || !this.check(data)) return false;
         const index: number = this._users.findIndex((user: IUser) => user.id === id);
-        this._users[index] = { id, ...data};
+        const password: string = this._users[index].password;
+        this._users[index] = {id, password, ...data};
         return true;
+    }
+
+    checkExistName(name: string): boolean {
+        return this._users.find((user: IUser) => user.name === name) ? true : false;
+    }
+
+    checkLogin(log: ISignIn): IUserAuth  {
+        // const user: IUser | undefined = this._users.find((user: IUser) => {
+        //     if (user.name === log.login && user.password === log.password) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // });
+        const user: IUser | undefined = this._users.find((user: IUser) => user.name === log.login && user.password === log.password);
+    
+        if (user) {
+            return {
+                isAuthenticated: true,
+                user
+            };
+        } else {
+            return {
+                isAuthenticated: false,
+                user: null
+            };
+        }
+    }
+
+    recoveryLogin(rec: IRecovery): boolean {
+        try {
+            const user: IUser | undefined = this._users.find((user: IUser) => {
+                if (user.name === rec.login && 
+                    moment(user.dateOfBirth).utcOffset('+04:00').format('YYYY/MM/DD') === rec.birthday) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        
+            if (user) {
+                user.password = rec.password;
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Error) {
+            return false;
+        }
     }
 
     add(data: IUser): boolean {
@@ -45,23 +99,19 @@ class Users {
 
     check(data: IUser): boolean {
         try {
-            const property: string[] = ['name', 'password', 'dateOfBirth', 'dateOfFirstLogin', 'dateOfNextNotif', 'information'];
+            const property: string[] = ['name', 'age', 'dateOfBirth', 'dateOfFirstLogin', 'dateOfNextNotif', 'information'];
             property.forEach(key => {
                 if(!has(data, key)) throw Error;
-            });
-            const checkDateOfBirth = new Date(data.dateOfBirth);
-            const checkDateOfFirstLogin = new Date(data.dateOfFirstLogin);//check for conversion to a date object
-            const checkDateOfNextNotif = new Date(data.dateOfNextNotif);
-            data.dateOfBirth = checkDateOfBirth.toISOString();
-            data.dateOfFirstLogin = checkDateOfFirstLogin.toISOString();//if the date is not in the ISOstring format
-            data.dateOfNextNotif = checkDateOfNextNotif.toISOString();
+            });//check for conversion to a date object
+            data.dateOfBirth = moment(data.dateOfBirth).toISOString(true);
+            data.dateOfFirstLogin = moment(data.dateOfFirstLogin).toISOString(true);//if the date is not in the ISOstring format
+            data.dateOfNextNotif = moment(data.dateOfNextNotif).toISOString(true);
             return true;
-        }
-        catch (Error) {
+        } catch (Error) {
             return false;
         }
     }
 
 }
 
-module.exports = Users;
+module.exports = new Users;

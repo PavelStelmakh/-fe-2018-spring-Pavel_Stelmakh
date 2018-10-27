@@ -1,7 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Pavel",
+    "name": "Pasha",
+    "age": "19",
     "password": "1111",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
@@ -10,8 +11,9 @@
   },
   {
     "id": 2,
-    "name": "Pavel",
-    "password": "1111",
+    "name": "Sasha",
+    "age": "24",
+    "password": "2222",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
     "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
@@ -19,8 +21,9 @@
   },
   {
     "id": 3,
-    "name": "Pavel",
-    "password": "1111",
+    "name": "Masha",
+    "age": "20",
+    "password": "3333",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
     "dateOfNextNotif": "2011-10-05T14:48:00.000Z",

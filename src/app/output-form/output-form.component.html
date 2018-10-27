@@ -1,22 +1,26 @@
 <div>
   <div>
-    <span>Name:</span>
-    <span>{{formValue?.username}}</span>
+    <span>{{'user-details.output-form.name' | translate}}:</span>
+    <span>{{formValue?.name}}</span>
   </div>
   <div>
-      <span>Age:</span>
-      <span>{{formValue?.userage}}</span>
+      <span>{{'user-details.output-form.age' | translate}}:</span>
+      <span>{{formValue?.age}}</span>
   </div>
   <div>
-      <span>Birthday:</span>
-      <span>{{formValue?.birthday}}</span>
+      <span>{{'user-details.output-form.birthday' | translate}}:</span>
+      <span>{{formValue?.dateOfBirth}}</span>
   </div>
   <div>
-      <span>Date of login:</span>
-      <span>{{formValue?.dateOfLogin}}</span>
+      <span>{{'user-details.output-form.dateOfLogin' | translate}}:</span>
+      <span>{{formValue?.dateOfFirstLogin}}</span>
   </div>
   <div>
-      <span>Date of notification:</span>
-      <span>{{formValue?.DateOfNotification}}</span>
+    <span>{{'user-details.output-form.information' | translate}}:</span>
+    <span>{{formValue?.information}}</span>
+</div>
+  <div>
+      <span>{{'user-details.output-form.dateOfNotification' | translate}}:</span>
+      <span>{{formValue?.dateOfNextNotif}}</span>
   </div>
 </div>

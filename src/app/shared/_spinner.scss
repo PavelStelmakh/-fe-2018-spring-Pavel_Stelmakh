@@ -1,0 +1,27 @@
+$angle: 360deg/7;
+
+@mixin animationSpin($start, $i) {
+  animation: spin_#{$i} 1s ease-out infinite;
+  @keyframes spin_#{$i} {
+    from { transform: rotate($start) translateX(25px) }
+    to { transform: rotate(-$start + $angle) translateX(25px) }
+  }
+}
+
+@mixin spinner() {
+  .spinner {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    @for $i from 0 through 6 {
+      div:nth-child(#{$i + 1}) {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background-color: rgb(61, 216, 250);
+        border-radius: 50px;
+        @include animationSpin($angle * $i, $i);
+      }
+    }
+  }
+}

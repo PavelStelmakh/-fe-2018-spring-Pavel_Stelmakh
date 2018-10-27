@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IUserForm } from './shared/IUserForm';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,13 @@ import { IUserForm } from './shared/IUserForm';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Please, fill in the fields';
-  formValue: IUserForm;
-
-  onSubmit(value: IUserForm) {
-    this.formValue = value;
+  
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
   }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
+
 }

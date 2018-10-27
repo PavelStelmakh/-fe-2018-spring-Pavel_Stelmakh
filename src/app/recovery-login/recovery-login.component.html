@@ -1,0 +1,11 @@
+<form [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="wrongData">{{'login.wrongData' | translate}}</div>
+  <div *ngIf="login.dirty && login.errors?.checkExistName">{{ 'login.notFound' | translate }}</div>
+  <div class="loading" *ngIf="login.dirty && login.status === 'PENDING'">loading...</div>
+  <input type="text" placeholder="login" formControlName="login">
+  <div *ngIf="birthday.dirty && birthday.errors?.date">{{ 'user-details.user-form.messages.dateOfBirth' | translate }}</div>
+  <input type="text" placeholder="date of birthday (YYYY/MM/DD)" formControlName="birthday">
+  <input type="password" placeholder="new password" formControlName="password">
+  <input type="submit" [disabled]="recoveryForm.pristine || recoveryForm.status !== 'VALID'" value="{{'login.recovery' | translate}}">
+  <a routerLink="/login">{{'login.back' | translate}}</a>
+</form>

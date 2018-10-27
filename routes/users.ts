@@ -1,10 +1,24 @@
-import { Router, Request, Response } from 'express';
+import { Router, Response, Request, NextFunction } from 'express';
 const router = Router();
 import { IUser } from '../models/IUser';
-const Users = require('../models/Users');
-const users = new Users;
+const loginRoute = require('./login');
+const users = require('../models/Users');
+import { getUserByToken } from '../shared/getUserByToken';
 
-router.get('/users', (req: Request, res: Response) => {
+router.use('/login', loginRoute);
+
+router.use('*', (req: Request, res: Response, next: NextFunction) => {
+    const data = getUserByToken(req);
+
+    if (data.user) {
+        next();
+    } else {
+        res.status(401);
+        res.end();
+    }
+});
+
+router.get('/users', (_req: Request, res: Response) => {
     res.status(200).send(users.users());
 });
 
@@ -13,7 +27,7 @@ router.get('/users/:id', (req: Request, res: Response) => {
         const id: number = +req.params['id'];
         const user: IUser | undefined = users.user(id);
         if (user) {
-            res.status(200).send(user);
+            setTimeout(() => res.status(200).send(user), 3000);
         } else {
             res.status(400);
             res.end();

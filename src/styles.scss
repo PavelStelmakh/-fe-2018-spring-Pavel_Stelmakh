@@ -1,5 +1,47 @@
 html, body {
     padding: 0;
     margin: 0;
+    font-family: Verdana;
     background-color: rgba(212,228,239,1);
+}
+
+input {
+    width: 450px;
+    border: 0;
+    border-bottom: 1px solid #666;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #ccc;
+}
+
+input::-webkit-input-placeholder {
+    color: #ccc;
+}
+
+input:-moz-placeholder {
+    color: #ccc;
+}
+
+input::-moz-placeholder {
+    color: #ccc;
+}
+
+input:-ms-input-placeholder {
+    color: #ccc; 
+}
+
+input:focus {
+    border-bottom: 1px solid #ccc;
+    color: #eee;
+}
+
+input[type="submit"], input[type="button"], button {
+    background-color: rgba(102, 102, 102, 0.5);
+    border: 1px solid #666;
+    width: 200px;
+    height: 40px;
+}
+
+input[type="submit"]:disabled, input[type="button"]:disabled, button:disabled {
+    background-color: rgba(102, 102, 102, 0);
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { usernameValidator, userageValidator, dateValidator } from '../validators';
-import { messageList } from '../shared/messageList';
-import { IUserForm } from '../shared/IUserForm';
+import { usernameValidator, userageValidator, dateValidator, checkExistNameValidator } from '../validators';
+import { UsersService } from '../users.service';
+import { IUser } from '../../../models/IUser';
+import { PopupService } from '../popup/popup.service';
+import * as moment  from 'moment';
 
 @Component({
   selector: 'app-user-form',
@@ -10,45 +12,71 @@ import { IUserForm } from '../shared/IUserForm';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-  @Output() submitForm: EventEmitter<IUserForm> = new EventEmitter<IUserForm>();
   userForm: FormGroup;
-  messageList: object;
+  @Output() update: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private builder: FormBuilder) { }
+  constructor(
+    private builder: FormBuilder, 
+    private user: UsersService,
+    private popup: PopupService
+    ) {}
 
   ngOnInit() {
-    this.messageList = messageList;
     this.userForm = this.builder.group({
-      username: ['', Validators.required, usernameValidator()],
-      userage: ['', [Validators.required, userageValidator()]],
-      birthday: ['', [Validators.required, dateValidator('YYYY/MM/DD')]],
-      dateOfLogin: ['', [Validators.required, dateValidator('DD MMMM YYYY')]],
-      DateOfNotification: ['', [Validators.required, dateValidator('DD-MMM-YY')]]
+      name: ['', Validators.required, [usernameValidator(), checkExistNameValidator(this.user)]],
+      age: ['', [Validators.required, userageValidator()]],
+      dateOfBirth: ['', [Validators.required, dateValidator('YYYY/MM/DD')]],
+      dateOfFirstLogin: ['', [Validators.required, dateValidator('DD MMMM YYYY')]],
+      information: ['', [Validators.required]],
+      dateOfNextNotif: ['', [Validators.required, dateValidator('DD-MMM-YY')]]
+    });
+    this.user.subject.subscribe((value: IUser) => {
+      if (value.id) {
+        const dateOfNextNotif = moment(value.dateOfNextNotif).format('DD-MMM-YY');
+        this.userForm.patchValue({
+          name: value.name,
+          age: value.age,
+          dateOfBirth: moment(value.dateOfBirth).format('YYYY/MM/DD'),
+          dateOfFirstLogin: moment(value.dateOfFirstLogin).format('DD MMMM YYYY'),
+          information: value.information,
+          dateOfNextNotif: dateOfNextNotif !== 'Invalid date' ? dateOfNextNotif: value.dateOfNextNotif
+        });
+      }
     });
   }
 
-  get username() {
-    return this.userForm.get('username');
+  get name() {
+    return this.userForm.get('name');
   }
 
-  get userage() {
-    return this.userForm.get('userage');
+  get age() {
+    return this.userForm.get('age');
   }
 
-  get birthday() {
-    return this.userForm.get('birthday');
+  get dateOfBirth() {
+    return this.userForm.get('dateOfBirth');
   }
 
-  get DateOfNotification() {
-    return this.userForm.get('DateOfNotification');
+  get dateOfNextNotif() {
+    return this.userForm.get('dateOfNextNotif');
   }
 
-  get dateOfLogin() {
-    return this.userForm.get('dateOfLogin');
+  get information() {
+    return this.userForm.get('information');
+  }
+
+  get dateOfFirstLogin() {
+    return this.userForm.get('dateOfFirstLogin');
   }
 
   onSubmit() {
-    this.submitForm.emit(this.userForm.value);
+    this.popup.show();
+    this.user.update(this.userForm.value).subscribe(result => {
+      if (result.status === 200) {
+        this.update.emit();
+        this.user.getUser();
+      }
+    });
   }
 
 }

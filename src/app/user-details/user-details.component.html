@@ -1,0 +1,17 @@
+<div appSpinner>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div [class.tabs]="true" (click)="onToggle($event)">
+    <div [ngClass]="{selectTabFirst: true, select: selectFirst}">{{'user-details.tabOut' | translate}}</div>
+    <div [ngClass]="{selectTabSecond: true, select: !selectFirst}">{{'user-details.tabIn' | translate}}</div>
+</div>
+<div *ngIf="selectFirst; then tabOut else tabIn"></div>
+<ng-template #tabOut><app-output-form></app-output-form></ng-template>
+<ng-template #tabIn><app-user-form (update)="reverseSelect()"></app-user-form></ng-template>
+<input type="button" value="{{'user-details.logout' | translate}}" (click)="logout()">

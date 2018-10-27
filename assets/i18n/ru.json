@@ -1,0 +1,44 @@
+{
+    "title": "Ангулар тренинг",
+    "login": {
+        "wrongData": "неверные данные",
+        "notFound": "Такой логин не найден",
+        "fogotPassword": "забыли пароль?",
+        "singnIn": "Войти",
+        "back": "Назад",
+        "recovery": "Восстановить"
+    },
+    "user-details": {
+        "tabOut": "Просмотр деталий",
+        "tabIn": "Редактирование",
+        "logout": "Выйти",
+        "output-form": {
+            "name": "Имя",
+            "age": "Возраст",
+            "birthday": "День рождения",
+            "dateOfLogin": "Дата регистрации",
+            "information": "Доп. информация",
+            "dateOfNotification": "Дата оповещения"
+        },
+        "user-form": {
+            "name": "Ваше имя",
+            "age": "Ваш возраст",
+            "birthday": "Дата рождения",
+            "dateOfLogin": "Дата регистрации",
+            "information": "Доп. информация",
+            "dateOfNotification": "Дата оповещения",
+            "submit": "отправить запрос",
+            "messages": {
+                "success": "Окей)",
+                "name": "Имя должно состоять из одного или двух слов, начинающихся с большой буквы",
+                "existname": "Это имя ещё существует",
+                "age": "Число должно быть из диапозона 18-65",
+                "dateOfBirth": "Формат даты YYYY/MM/DD",
+                "dateOfFirstLogin": "Формат даты DD MMMM YYYY",
+                "information": "Это поле обязательное для заполнения",
+                "dateOfNextNotif": "Формат даты  DD-MMM-YY"
+            }
+        }
+    }
+    
+}

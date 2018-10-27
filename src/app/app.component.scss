@@ -7,14 +7,26 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-h3 {
+div:not(.switchLang) {
     background-color: #fa5655;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     height: 40px;
     font-family: Verdana;
-    padding-left: 40px;
     font-size: 1.25rem;
     line-height: 40px;
     color: rgba(0, 0, 0, 0.7);
+    padding-left: 40px;
+}
+
+h3, .switchLang {
+    display: inline-block;
+    margin: 0;    
+}
+
+button {
+    margin: 0 10px;
+    width: 50px;
+    height: 25px;  
+    color: #ccc;
 }

@@ -1,0 +1,44 @@
+{
+    "title": "Angular training",
+    "login": {
+        "wrongData": "wrong data",
+        "notFound": "such login is not found",
+        "fogotPassword": "forgot password?",
+        "singnIn": "Sign in",
+        "back": "back",
+        "recovery": "recovery"
+    },
+    "user-details": {
+        "tabOut": "Show Deteils",
+        "tabIn": "Edit Deteils",
+        "logout": "logout",
+        "output-form": {
+            "name": "name",
+            "age": "Age",
+            "birthday": "Birthday",
+            "dateOfLogin": "Date of login",
+            "information": "Information",
+            "dateOfNotification": "Date of notification"
+        },
+        "user-form": {
+            "name": "Your name",
+            "age": "Your age",
+            "birthday": "Your birthday",
+            "dateOfLogin": "Date of login",
+            "information": "Information",
+            "dateOfNotification": "Date of notification",
+            "submit": "send request",
+            "messages": {
+                "success": "OK",
+                "name": "Username must consist of one or two word with camel case sensitive",
+                "existname": "This name exist already",
+                "age": "Range of numbers should from 18 till 65",
+                "dateOfBirth": "date should have format YYYY/MM/DD",
+                "dateOfFirstLogin": "date should have format DD MMMM YYYY",
+                "information": "Field is required",
+                "dateOfNextNotif": "date should have format DD-MMM-YY"
+            }
+        }
+    }
+    
+}

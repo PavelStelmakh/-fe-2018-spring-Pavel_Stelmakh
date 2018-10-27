@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-export function checkUsername(control: AbstractControl):  Observable<ValidationErrors | null> {
+export function checkUsername(control: AbstractControl): Observable<ValidationErrors | null> {
     const name: string[] = control.value.trim().split(' ').filter(Boolean);
     try {
         if (name.length == 0 || name.length > 2) throw new Error;
@@ -17,6 +17,6 @@ export function checkUsername(control: AbstractControl):  Observable<ValidationE
         return of(null);
     }
     catch (Error) {
-        return of({username: control.value});
+        return of({name: control.value});
     }
 }
