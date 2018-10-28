@@ -1,7 +1,9 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="wrongData">{{'login.wrongData' | translate}}</div>
-  <div *ngIf="login.dirty && login.errors?.checkExistName">{{ 'login.notFound' | translate }}</div>
-  <div class="loading" *ngIf="login.dirty && login.status === 'PENDING'">loading...</div>
+  <div [class.messages]="true">
+    <div *ngIf="wrongData && login.pristine">{{'login.wrongData' | translate}}</div>
+    <div *ngIf="login.dirty && login.errors?.checkExistName">{{ 'login.notFound' | translate }}</div>
+    <div class="loading" *ngIf="login.dirty && login.status === 'PENDING'">loading...</div>
+  </div>
   <input type="text" placeholder="login" formControlName="login">
   <input type="password" placeholder="password" formControlName="password">
   <div [class.singIn]="true">

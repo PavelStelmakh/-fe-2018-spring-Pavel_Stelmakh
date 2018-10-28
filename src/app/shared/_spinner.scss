@@ -11,6 +11,7 @@ $angle: 360deg/7;
 @mixin spinner() {
   .spinner {
     position: absolute;
+    z-index: 1;
     top: 50vh;
     left: 50vw;
     @for $i from 0 through 6 {

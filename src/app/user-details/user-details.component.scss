@@ -1,3 +1,65 @@
-@import "../shared/spinner";
 
-@include spinner();
+@keyframes detailsAnimation {
+    from {
+        top: 0;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 20vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+    }
+}
+
+:host {    
+    text-align: center;
+    display: block;
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 20vh;
+    left: calc(50vw - 250px);
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.5);
+    animation: detailsAnimation 1s;
+
+    .tabsView {
+        padding: 10px 0;
+    }
+}
+
+input {
+    margin: 30px 0;
+}
+
+.tabs div {
+    color: #ccc;
+    position: relative;
+    background-color: rgba(102, 102, 102, 0.5);
+    display: inline-block;
+    width: 250px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    transition: left 200ms ease-in 200ms, right 200ms ease-in;
+    
+    &:hover {
+        background-color: rgba(102, 102, 102, 0.7);
+    }
+}
+
+.selectTabFirst {
+    left: 0;
+}
+
+.selectTabSecond {
+    right: 0;
+}
+
+.selectTabFirst.select {
+    left: -5px;
+}
+
+.selectTabSecond.select {
+    right: -5px;
+}

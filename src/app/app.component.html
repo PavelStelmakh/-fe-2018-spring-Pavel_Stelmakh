@@ -1,11 +1,20 @@
 <app-popup>Saving...</app-popup>
-<div>
+<div appSpinner>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div [class.content]="true">
     <h3>
         {{'title' | translate}}
     </h3>
     <div [class.switchLang]="true">
-        <button (click)="switchLang('en')">en</button>
-        <button (click)="switchLang('ru')">ru</button>
+        <a (click)="switchLang('en')">en</a>
+        <a (click)="switchLang('ru')">ru</a>
     </div>
 </div>
 <router-outlet></router-outlet>

@@ -1,5 +1,44 @@
+@keyframes loginAnimation {
+    from {
+        top: 0;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 20vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@keyframes messageAnimation {
+    from {
+        top: -40px;
+        background-color: rgba(250, 86, 85, 0);
+        box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 0;
+        background-color: rgba(250, 86, 85, 1);
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+    }
+}
+
 :host {    
-    text-align: center; 
+    text-align: center;
+    display: block;
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 20vh;
+    left: calc(50vw - 250px);
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.5);
+    animation: loginAnimation 1s;
+
+    form {
+        padding: 10px 0;
+    }
+
 }
 
 .singIn {
@@ -11,39 +50,24 @@ a {
     margin-left: 10px;
 }
 
-// input {
-//     width: 450px;
-//     border: 0;
-//     border-bottom: 1px solid #666;
-//     height: 30px;
-//     background-color: rgba(0, 0, 0, 0);
-//     color: #ccc;
-// }
+.messages {
+    position: absolute;
+    top: -13vh;
+    height: 40px;
+    line-height: 40px;
+    width: 500px;
+    color: #ccc;
 
-// input::-webkit-input-placeholder {
-//     color: #ccc;
-// }
+    div {
+        position: relative;
+        top: 0;
+        background-color: rgba(250, 86, 85, 1);
+        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+        animation:  messageAnimation 1s;
+    }
 
-// input:-moz-placeholder {
-//     color: #ccc;
-// }
+    .loading {
+        background-color: rgb(250, 86, 85);
+    }
 
-// input::-moz-placeholder {
-//     color: #ccc;
-// }
-
-// input:-ms-input-placeholder {
-//     color: #ccc; 
-// }
-
-// input:focus {
-//     border-bottom: 1px solid #ccc;
-//     color: #eee;
-// }
-
-// input[type="submit"] {
-//     background-color: rgba(102, 102, 102, 0.5);
-//     border: 1px solid #666;
-//     width: 200px;
-//     height: 40px;
-// }
+}
