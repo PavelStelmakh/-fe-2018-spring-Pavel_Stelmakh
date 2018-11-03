@@ -1,6 +1,12 @@
 {
     "title": "Angular training",
+    "tree": "tree",
+    "search": "search",
+    "user-list": {
+        "notFound": "sorry, nothing is found"
+    },
     "login": {
+        "login": "login",
         "wrongData": "wrong data",
         "notFound": "such login is not found",
         "fogotPassword": "forgot password?",

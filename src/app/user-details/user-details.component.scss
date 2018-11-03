@@ -1,16 +1,6 @@
+@import '../shared/driveAnimation';
 
-@keyframes detailsAnimation {
-    from {
-        top: 0;
-        background-color: rgba(0, 0, 0, 0);
-        box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0);
-    }
-    to {
-        top: 20vh;
-        background-color: rgba(0, 0, 0, 0.7);
-        box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
-    }
-}
+@include animation("details", 0, 20vh, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
 
 :host {    
     text-align: center;

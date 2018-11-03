@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    width: 500px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    text-align: start;
+
+    & > div > div {
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+}

@@ -1,0 +1,14 @@
+@mixin animation($name, $topFrom, $topTo, $backFrom, $backTo) {
+    @keyframes #{$name}Animation {
+        from {
+            top: $topFrom;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0);
+        }
+        to {
+            top: $topTo;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+        }
+    }
+}

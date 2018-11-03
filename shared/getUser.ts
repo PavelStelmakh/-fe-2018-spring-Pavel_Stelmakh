@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
-import { IUser } from '../models/IUser';
+import { User } from '../models/User';
 
-export function getUser(token: string, secret: string): IUser | null {
+export function getUser(token: string, secret: string): User | null {
     try {
-        const user: IUser = jwt.verify(token, secret);
+        const user: User = jwt.verify(token, secret);
         return user;
     } catch(e) {
         return null;

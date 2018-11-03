@@ -1,31 +1,50 @@
-import { Router, Response, Request, NextFunction } from 'express';
+import { Router, Response, Request } from 'express';
 const router = Router();
-import { IUser } from '../models/IUser';
+import { User } from '../models/User';
 const loginRoute = require('./login');
 const users = require('../models/Users');
-import { getUserByToken } from '../shared/getUserByToken';
+// import { getUserByToken } from '../shared/getUserByToken';//I need it in the next task
 
 router.use('/login', loginRoute);
 
-router.use('*', (req: Request, res: Response, next: NextFunction) => {
-    const data = getUserByToken(req);
+// router.use('*', (req: Request, res: Response, next: NextFunction) => {//it too
+//     const data = getUserByToken(req);
 
-    if (data.user) {
-        next();
-    } else {
-        res.status(401);
-        res.end();
-    }
-});
+//     if (data.user) {
+//         next();
+//     } else {
+//         res.status(401);
+//         res.end();
+//     }
+// });
 
 router.get('/users', (_req: Request, res: Response) => {
     res.status(200).send(users.users());
 });
 
+router.get('/users/search/:name', (req: Request, res: Response) => {
+    try {
+        const name: number = req.params['name'];
+        const searchUsers: User[] = users.search(name);
+        setTimeout(() => {
+            if (searchUsers.length > 0) {
+                res.status(200).send(searchUsers);
+            } else {
+                res.status(400);
+                res.end();
+            }
+        }, 1000);
+    }
+    catch (Error) {
+        res.status(418);
+        res.end();
+    }
+});
+
 router.get('/users/:id', (req: Request, res: Response) => {
     try {
         const id: number = +req.params['id'];
-        const user: IUser | undefined = users.user(id);
+        const user: User | undefined = users.user(id);
         if (user) {
             setTimeout(() => res.status(200).send(user), 3000);
         } else {

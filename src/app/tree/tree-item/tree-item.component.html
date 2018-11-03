@@ -1,0 +1,7 @@
+<div (click)="expandTree()">
+    <div><fa-icon [icon]="expandItem ? faCaretDown : faCaretLeft" size="1x" style="color: #ccc"></fa-icon></div>
+  <span>{{itemTree}}</span>
+</div>
+<div *ngIf="expandItem">
+  <app-tree-item *ngFor="let item of items" [item]="item"></app-tree-item>
+</div>

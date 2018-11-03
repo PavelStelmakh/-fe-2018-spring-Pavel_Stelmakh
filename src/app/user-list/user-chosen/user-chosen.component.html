@@ -1,0 +1,17 @@
+<div [class.chosen]="true">
+  <div>
+    <div>
+      <span>{{'user-details.output-form.name' | translate}}:</span>
+      <span>{{user?.name}}</span>
+    </div>
+    <div>
+        <span>{{'user-details.output-form.age' | translate}}:</span>
+        <span>{{user?.age}}</span>
+    </div>
+    <div>
+      <span>{{'user-details.output-form.information' | translate}}:</span>
+      <span>{{user?.information}}</span>
+    </div>
+  </div>
+  <div [class.expand]="expand" (click)="expandList()"><fa-icon [icon]="faCaretDown" size="3x" style="color: #ccc"></fa-icon></div>
+</div>

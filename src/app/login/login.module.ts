@@ -34,7 +34,7 @@ const route: Routes = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-})
+    })
   ],
   declarations: [LoginComponent, RecoveryLoginComponent],
   exports: [LoginComponent]

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { usernameValidator, userageValidator, dateValidator, checkExistNameValidator } from '../validators';
 import { UsersService } from '../users.service';
-import { IUser } from '../../../models/IUser';
+import { User } from '../../../models/User';
 import { PopupService } from '../popup/popup.service';
 import * as moment  from 'moment';
 
@@ -30,7 +30,7 @@ export class UserFormComponent implements OnInit {
       information: ['', [Validators.required]],
       dateOfNextNotif: ['', [Validators.required, dateValidator('DD-MMM-YY')]]
     });
-    this.user.subject.subscribe((value: IUser) => {
+    this.user.subject.subscribe((value: User) => {
       if (value.id) {
         const dateOfNextNotif = moment(value.dateOfNextNotif).format('DD-MMM-YY');
         this.userForm.patchValue({

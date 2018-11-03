@@ -1,0 +1,19 @@
+@import '../shared/driveAnimation';
+
+@include animation("list", 0, 20vh, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+
+:host {
+    display: block;
+    color: #ccc;
+
+    .tree {
+        overflow: auto;
+        width: 500px;
+        height: 400px;
+    }
+
+    button {
+        margin: 3px;        
+        color: #ccc;
+    }
+}

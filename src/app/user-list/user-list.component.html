@@ -1,0 +1,9 @@
+<app-user-chosen [user]="user" (expand)="expandList($event)"></app-user-chosen>
+<div *ngIf="expand">
+    <input type="text" placeholder="search by name" [formControl]="username" (focus)="focusInput()">
+    <div (click)="searchUsers()" [class.iconSearch]="true"><fa-icon [icon]="faSearch" size="1x" style="color: #ccc"></fa-icon></div>
+    <app-user-dropdown-list *ngIf="focus">
+        <app-user-dropdown-item *ngFor="let user of users" [user]="user" (click)="selectUser(user)" appHover></app-user-dropdown-item>
+        <div *ngIf="notFound">{{'user-list.notFound' | translate}}</div>
+    </app-user-dropdown-list>
+</div>

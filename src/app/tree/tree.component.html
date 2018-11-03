@@ -1,0 +1,7 @@
+<input type="text" [formControl]="pathout" placeholder="path"><br>
+<input type="text" [formControl]="pathin" placeholder="search"><br>
+<button (click)="search()">search</button>
+<button (click)="resetTree()">reset tree</button>
+<div [class.tree]="true">
+  <app-tree-item *ngFor="let item of items" [item]="item"></app-tree-item>
+</div>

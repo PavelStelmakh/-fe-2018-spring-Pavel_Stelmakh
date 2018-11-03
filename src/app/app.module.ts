@@ -8,7 +8,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { InvalidInputComponent } from './invalid-input/invalid-input.component';
-import { OutputFormComponent } from './output-form/output-form.component';
 import { LoginModule } from './login/login.module';
 import { LoginComponent } from './login/login.component';
 import { BASE_URL } from './url.service';
@@ -18,12 +17,19 @@ import { AuthGuard } from './auth/auth.guard';
 import { SpinnerDirective } from './spinner.directive';
 import { HttpLoaderFactory } from './shared/HttpLoaderFactory';
 import { PopupModule } from './popup/popup.module';
-
+import { UserListModule } from './user-list/user-list.module';
+import { OutputFormComponent } from './output-form/output-form.component';
+import { TreeModule } from './tree/tree.module';
+import { SearchAndTreeComponent } from './search-and-tree/search-and-tree.component';
 
 const route: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    component: SearchAndTreeComponent
+  },
+  {
+    path: 'details',
     component: UserDetailsComponent,
     canActivate: [AuthGuard]
   },
@@ -42,9 +48,10 @@ const route: Routes = [
     AppComponent,
     UserFormComponent,
     InvalidInputComponent,
-    OutputFormComponent,
     UserDetailsComponent,
-    SpinnerDirective
+    SpinnerDirective,
+    OutputFormComponent,
+    SearchAndTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,9 @@ const route: Routes = [
         deps: [HttpClient, BASE_URL]
       },
     }),
-    PopupModule
+    PopupModule,
+    UserListModule,
+    TreeModule
   ],
   providers: [
     {provide: BASE_URL, useValue: 'http://localhost:3000'},

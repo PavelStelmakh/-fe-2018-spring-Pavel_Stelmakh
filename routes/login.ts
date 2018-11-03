@@ -2,15 +2,15 @@ import { Router, Response, Request } from 'express';
 const router = Router();
 import { getUserByToken } from '../shared/getUserByToken';
 import { getToken } from '../shared/getToken';
-import { IUserAuth } from '../models/IUserAuth';
-import { IUser } from '../models/IUser';
+import { UserAuth } from '../models/UserAuth';
+import { User } from '../models/User';
 const users = require('../models/Users');
 
 router.get('', function (req: Request, res: Response) {
     const data = getUserByToken(req);
     
     if (data.user) {
-        const id: {id: number} = {id: (data.user as IUser)['id']};
+        const id: {id: number} = {id: (data.user as User)['id']};
         res.status(200).send(id);
     } else {
         res.status(401);
@@ -23,7 +23,7 @@ router.get('/find/:name', function (req: Request, res: Response) {
     const data = getUserByToken(req);
 
     setTimeout(() => {
-        if (data.user && (data.user as IUser)['name'] === name) {
+        if (data.user && (data.user as User)['name'] === name) {
             res.status(200);
         } else if (!users.checkExistName(name)) {
             res.status(200);
@@ -52,7 +52,7 @@ router.post('', function (req: Request, res: Response) {
         const password = req.body.password;
 
         if (login && password) {
-            const user: IUserAuth = users.checkLogin({login, password});
+            const user: UserAuth = users.checkLogin({login, password});
             if (user.isAuthenticated === true) {
                 const secret = req.app.get('secret');
                 const token = getToken(user.user, secret);

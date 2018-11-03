@@ -1,46 +1,47 @@
 const users = require('../../assets/users.json');
-import { IUser } from './IUser';
-import { IUserAuth } from './IUserAuth';
-import { ISignIn } from './ISignIn';
-import { IRecovery } from './IRecovery';
+import { User } from './User';
+import { UserAuth } from './UserAuth';
+import { SignIn } from './SignIn';
+import { Recovery } from './Recovery';
 const { has } = require('lodash');
 import * as moment  from 'moment';
 
 class Users {
-    private _users: IUser[] = users || [];
+    private _users: User[] = users || [];
 
-    users(): IUser[] {
+    users(): User[] {
         return this._users;
     }
 
-    user(id: number): IUser | undefined {
-        return this._users.find((user: IUser) => user.id === id);
+    user(id: number): User | undefined {
+        return this._users.find((user: User) => user.id === id);
     }
 
-    update(id: number, data: IUser): boolean {
+    search(name: string): User[] {
+        if (name === 'all') {
+            return this._users;
+        } else {
+            return this._users.filter((user: User) => ~user.name.indexOf(name));
+        }
+    }
+
+    update(id: number, data: User): boolean {
         if(!this._users.length) return false;
-        if (!this._users.some((user: IUser) => user.id === id)
+        if (!this._users.some((user: User) => user.id === id)
             || !data
             || !this.check(data)) return false;
-        const index: number = this._users.findIndex((user: IUser) => user.id === id);
+        const index: number = this._users.findIndex((user: User) => user.id === id);
         const password: string = this._users[index].password;
         this._users[index] = {id, password, ...data};
         return true;
     }
 
     checkExistName(name: string): boolean {
-        return this._users.find((user: IUser) => user.name === name) ? true : false;
+        return this._users.find((user: User) => user.name === name) ? true : false;
     }
 
-    checkLogin(log: ISignIn): IUserAuth  {
-        // const user: IUser | undefined = this._users.find((user: IUser) => {
-        //     if (user.name === log.login && user.password === log.password) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // });
-        const user: IUser | undefined = this._users.find((user: IUser) => user.name === log.login && user.password === log.password);
+    checkLogin(log: SignIn): UserAuth  {
+        const user: User | undefined = this._users.find((user: User) => user.name === log.login && user.password === log.password);
     
         if (user) {
             return {
@@ -55,9 +56,9 @@ class Users {
         }
     }
 
-    recoveryLogin(rec: IRecovery): boolean {
+    recoveryLogin(rec: Recovery): boolean {
         try {
-            const user: IUser | undefined = this._users.find((user: IUser) => {
+            const user: User | undefined = this._users.find((user: User) => {
                 if (user.name === rec.login && 
                     moment(user.dateOfBirth).utcOffset('+04:00').format('YYYY/MM/DD') === rec.birthday) {
                     return true;
@@ -77,7 +78,7 @@ class Users {
         }
     }
 
-    add(data: IUser): boolean {
+    add(data: User): boolean {
         if (!data || !this.check(data)) return false;
         let id: number;
         if (this._users.length == 0) {
@@ -92,12 +93,12 @@ class Users {
     }
 
     delete(id: number): boolean {
-        if (!this._users.some((user: IUser) => user.id === id)) return false;
-        this._users = this._users.filter((user: IUser) => user.id !== id);
+        if (!this._users.some((user: User) => user.id === id)) return false;
+        this._users = this._users.filter((user: User) => user.id !== id);
         return true;
     }
 
-    check(data: IUser): boolean {
+    check(data: User): boolean {
         try {
             const property: string[] = ['name', 'age', 'dateOfBirth', 'dateOfFirstLogin', 'dateOfNextNotif', 'information'];
             property.forEach(key => {

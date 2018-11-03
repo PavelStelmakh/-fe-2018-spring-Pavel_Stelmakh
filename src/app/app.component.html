@@ -12,7 +12,8 @@
     <h3>
         {{'title' | translate}}
     </h3>
-    <div [class.switchLang]="true">
+    <div [class.LoginAndLang]="true">
+        <a routerLink="/login">{{'login.login' | translate}}</a>
         <a (click)="switchLang('en')">en</a>
         <a (click)="switchLang('ru')">ru</a>
     </div>

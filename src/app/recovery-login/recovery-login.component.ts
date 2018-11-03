@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { IRecovery } from '../../../models/IRecovery';
+import { Recovery } from 'models/Recovery';
 import { dateValidator, checkExistNameValidator } from '../validators';
 import { UsersService } from '../users.service';
 
@@ -44,7 +44,7 @@ export class RecoveryLoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const data: IRecovery = {
+    const data: Recovery = {
       login: this.login.value, 
       birthday: this.birthday.value, 
       password: this.password.value

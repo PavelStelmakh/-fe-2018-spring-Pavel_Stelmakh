@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
           switch (state.url) {
             case '/login':
             case '/login/recovery': 
-              this.router.navigate(['']);
+              this.router.navigate(['/details']);
               return of(false);
             default: return of(true);
           }

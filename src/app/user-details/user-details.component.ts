@@ -26,7 +26,7 @@ export class UserDetailsComponent implements OnInit {
     this.auth.logout().subscribe(result => {
       if (result.status === 200) {
         this.userService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
     },
     error => {

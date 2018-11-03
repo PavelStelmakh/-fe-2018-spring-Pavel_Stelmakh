@@ -1,0 +1,33 @@
+.chosen {
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    text-align: start;
+
+    & > div:first-child {
+        width: 220px;
+
+        & > div {
+            display: flex;
+            justify-content: space-between;
+            & > span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+    }
+
+    & > div:last-child {
+        display: inline-block;
+        transform: rotate(90deg);
+        transition: transform 100ms linear;
+    }
+
+    & > div.expand {
+        transform: rotate(0deg);
+    }
+
+}
+

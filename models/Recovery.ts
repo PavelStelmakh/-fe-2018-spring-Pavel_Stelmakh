@@ -1,4 +1,4 @@
-export interface IRecovery {
+export interface Recovery {
     login: string,
     birthday: string,
     password: string

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { ISignIn } from '../../../models/ISignIn';
+import { SignIn } from 'models/SignIn';
 import { checkExistNameValidator } from '../validators/checkExistName-validator';
 import { UsersService } from '../users.service';
 
@@ -39,13 +39,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const data: ISignIn = {
+    const data: SignIn = {
       login: this.login.value,
       password: this.password.value
     };
     this.auth.signIn(data).subscribe(result => {
       if (result.status === 200) {        
-        this.router.navigate(['/']);
+        this.router.navigate(['/details']);
       }
     },
     error => {

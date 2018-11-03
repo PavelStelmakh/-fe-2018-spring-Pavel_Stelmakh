@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BASE_URL } from '../url.service';
-import { ISignIn } from '../../../models/ISignIn';
-import { IRecovery } from '../../../models/IRecovery';
+import { SignIn } from 'models/SignIn';
+import { Recovery } from 'models/Recovery';
 import { tap } from 'rxjs/operators';
 import { UsersService } from '../users.service';
 
@@ -17,8 +17,8 @@ export class AuthService {
     private user: UsersService
     ) { }
 
-  signIn(userData: ISignIn) {
-    return this.http.post<ISignIn>(this.url + '/login', userData, {
+  signIn(userData: SignIn) {
+    return this.http.post<SignIn>(`${this.url}/login`, userData, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       }),
@@ -27,8 +27,8 @@ export class AuthService {
     });
   }
 
-  recovery(userData: IRecovery) {
-    return this.http.post<ISignIn>(this.url + '/login/recovery', userData, {
+  recovery(userData: Recovery) {
+    return this.http.post<SignIn>(`${this.url}/login/recovery`, userData, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       }),
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   checkLogin() {
-    return this.http.get(this.url + '/login', {
+    return this.http.get(`${this.url}/login`, {
       observe: 'response',
       withCredentials: true
     })
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.get(this.url + '/login/logout', {
+    return this.http.get(`${this.url}/login/logout`, {
       observe: 'response',
       withCredentials: true
     });

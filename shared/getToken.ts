@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-import { IUser } from '../models/IUser';
+import { User } from '../models/User';
 
-export function getToken(user: IUser | null, secret: string): string {
+export function getToken(user: User | null, secret: string): string {
     const token: string = jwt.sign(user, secret, { expiresIn: '10h' });
 
     return token;
