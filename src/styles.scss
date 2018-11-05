@@ -36,6 +36,11 @@ input:focus {
     color: #eee;
 }
 
+button:focus {
+    border-bottom: 1px solid #ccc;
+    color: #eee;
+}
+
 input[type="submit"], input[type="button"], button {
     background-color: rgba(102, 102, 102, 0.5);
     border: 1px solid #666;

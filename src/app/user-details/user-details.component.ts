@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
@@ -9,16 +9,19 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-  selectFirst: boolean;
+  select: number;
+  isEditUsers: boolean;
+  @Input() role: string;
 
   constructor(
     private auth: AuthService, 
     private router: Router,
     private userService: UsersService
-    ) { }
+    ) {}
 
   ngOnInit() {
-    this.selectFirst = true;
+    this.isEditUsers = false;
+    this.select = 0;
     this.userService.getUser();
   }
 
@@ -26,7 +29,7 @@ export class UserDetailsComponent implements OnInit {
     this.auth.logout().subscribe(result => {
       if (result.status === 200) {
         this.userService.logout();
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       }
     },
     error => {
@@ -34,14 +37,9 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
-  onToggle(event){
-    if (!event.target.classList.contains('select')) {
-      this.reverseSelect();
-    } 
-  }
-
-  reverseSelect() {
-    this.selectFirst = !this.selectFirst;
+  onToggle(tab: number){
+    this.isEditUsers = false;
+    this.select = tab;
   }
 
 }

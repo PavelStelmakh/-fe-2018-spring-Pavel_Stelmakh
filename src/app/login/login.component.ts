@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
       password: this.password.value
     };
     this.auth.signIn(data).subscribe(result => {
-      if (result.status === 200) {        
-        this.router.navigate(['/details']);
+      if (result.status === 200) { 
+        this.router.navigate([`/${result.body['role']}`]);
       }
     },
     error => {

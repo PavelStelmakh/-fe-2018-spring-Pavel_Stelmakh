@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../users.service';
-import { User } from '../../../models/User';
+import { UsersService } from '../../users.service';
+import { User } from 'models/User';
 import * as moment  from 'moment';
 
 @Component({
@@ -14,7 +14,7 @@ export class OutputFormComponent implements OnInit {
   constructor(private user: UsersService) { }
 
   ngOnInit() {
-    this.user.subject.subscribe((value: User) => {
+    this.user.userSubject.subscribe((value: User) => {
       this.formValue = value;
       if (value.id) {
         const dateOfNextNotif = moment(value.dateOfNextNotif).utcOffset('+04:00').format('DD-MMM-YY');

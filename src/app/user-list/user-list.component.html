@@ -1,4 +1,7 @@
-<app-user-chosen [user]="user" (expand)="expandList($event)"></app-user-chosen>
+<app-user-chosen [user]="user" 
+(expand)="expandList($event)" 
+(delete)="updateUsers()"
+(edit)="editUser($event)"></app-user-chosen>
 <div *ngIf="expand">
     <input type="text" placeholder="search by name" [formControl]="username" (focus)="focusInput()">
     <div (click)="searchUsers()" [class.iconSearch]="true"><fa-icon [icon]="faSearch" size="1x" style="color: #ccc"></fa-icon></div>

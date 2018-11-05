@@ -13,5 +13,12 @@
       <span>{{user?.information}}</span>
     </div>
   </div>
-  <div [class.expand]="expand" (click)="expandList()"><fa-icon [icon]="faCaretDown" size="3x" style="color: #ccc"></fa-icon></div>
+  <div [class.expand]="expand" (click)="expandList()">
+    <fa-icon [icon]="faCaretDown" size="3x" style="color: #ccc"></fa-icon>
+  </div>
+</div>
+<div [class.buttons]="true">
+  <button (click)="deleteUser()" [disabled]="!user">{{'user-details.user-chosen.DeleteButton' | translate}}</button>
+  <button (click)="editUser()" [disabled]="!user">{{'user-details.user-chosen.EditButton' | translate}}</button>
+  <button (click)="addUser()">{{'user-details.user-chosen.AddButton' | translate}}</button>
 </div>

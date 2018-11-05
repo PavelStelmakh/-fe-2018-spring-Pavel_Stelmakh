@@ -3,12 +3,12 @@ import { Observable, of } from 'rxjs';
 import { delay, switchMap, catchError } from 'rxjs/operators';
 import { UsersService } from '../users.service';
 //ifExist - function return true if name found else false
-export function checkExistNameValidator(service: UsersService, ifExist: boolean = false): AsyncValidatorFn {
+export function checkExistNameValidator(service: UsersService, ifExist: boolean = false, id?: number): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {        
         return of(null).pipe(
             delay(200),
             switchMap(() => {
-                return service.checkExistName(control.value).pipe(
+                return service.checkExistName(control.value, id).pipe(
                     switchMap(response => {
                         if (response.status === 200) {
                             return !ifExist ? of(null) : of({checkExistName: control.value});

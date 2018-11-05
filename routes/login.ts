@@ -7,23 +7,23 @@ import { User } from '../models/User';
 const users = require('../models/Users');
 
 router.get('', function (req: Request, res: Response) {
-    const data = getUserByToken(req);
+    const {user} = getUserByToken(req);
     
-    if (data.user) {
-        const id: {id: number} = {id: (data.user as User)['id']};
-        res.status(200).send(id);
+    if (user) {
+        const data: {id: number, role: string} = {id: user['id'], role: user['role']};
+        res.status(200).send(data);
     } else {
         res.status(401);
     }
     res.end();
 });
 
-router.get('/find/:name', function (req: Request, res: Response) {
-    const name = req.params['name'];
-    const data = getUserByToken(req);
+router.get('/find/:name/:id', function (req: Request, res: Response) {
+    const name: string = req.params['name'];
+    const id: number = +req.params['id'];
 
     setTimeout(() => {
-        if (data.user && (data.user as User)['name'] === name) {
+        if (id !== 0 && users.user(id).name === name) {
             res.status(200);
         } else if (!users.checkExistName(name)) {
             res.status(200);
@@ -56,9 +56,10 @@ router.post('', function (req: Request, res: Response) {
             if (user.isAuthenticated === true) {
                 const secret = req.app.get('secret');
                 const token = getToken(user.user, secret);
+                const role: string = (user.user as User).role;
 
                 res.cookie('auth_token', token);                
-                res.status(200);
+                res.status(200).send({role});
             } else {
                 res.status(401);
             }

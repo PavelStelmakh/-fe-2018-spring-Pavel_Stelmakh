@@ -1,22 +1,22 @@
-import { Router, Response, Request } from 'express';
+import { Router, Response, Request, NextFunction } from 'express';
 const router = Router();
 import { User } from '../models/User';
 const loginRoute = require('./login');
 const users = require('../models/Users');
-// import { getUserByToken } from '../shared/getUserByToken';//I need it in the next task
+import { getUserByToken } from '../shared/getUserByToken';
 
 router.use('/login', loginRoute);
 
-// router.use('*', (req: Request, res: Response, next: NextFunction) => {//it too
-//     const data = getUserByToken(req);
+router.use('*', (req: Request, res: Response, next: NextFunction) => {
+    const data = getUserByToken(req);
 
-//     if (data.user) {
-//         next();
-//     } else {
-//         res.status(401);
-//         res.end();
-//     }
-// });
+    if (data.user) {
+        next();
+    } else {
+        res.status(401);
+        res.end();
+    }
+});
 
 router.get('/users', (_req: Request, res: Response) => {
     res.status(200).send(users.users());

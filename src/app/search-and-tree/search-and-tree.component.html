@@ -1,7 +1,0 @@
-<div [class.tabs]="true" (click)="onToggle($event)">
-  <div [ngClass]="{selectTabFirst: true, select: selectFirst}">{{'search' | translate}}</div>
-  <div [ngClass]="{selectTabSecond: true, select: !selectFirst}">{{'tree' | translate}}</div>
-</div>
-<div *ngIf="selectFirst; then tabFirst else tabSecond" [class.tabsView]="true"></div>
-<ng-template #tabFirst><app-user-list></app-user-list></ng-template>
-<ng-template #tabSecond><app-tree></app-tree></ng-template>

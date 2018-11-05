@@ -19,9 +19,9 @@ class Users {
 
     search(name: string): User[] {
         if (name === 'all') {
-            return this._users;
+            return this._users.filter((user: User) => user.role === 'user');
         } else {
-            return this._users.filter((user: User) => ~user.name.indexOf(name));
+            return this._users.filter((user: User) => ~user.name.indexOf(name) && user.role === 'user');
         }
     }
 
@@ -32,7 +32,8 @@ class Users {
             || !this.check(data)) return false;
         const index: number = this._users.findIndex((user: User) => user.id === id);
         const password: string = this._users[index].password;
-        this._users[index] = {id, password, ...data};
+        const role: string = this._users[index].role;
+        this._users[index] = {id, password, role, ...data};
         return true;
     }
 
@@ -88,6 +89,7 @@ class Users {
             id = Math.max(...idArray) + 1;
         }
         data.id = id;
+        data.role = 'user';
         this._users.push({...data});
         return true;
     }

@@ -13,6 +13,16 @@
         : ('user-details.user-form.messages.existname' | translate) }}"
         type="error"></app-invalid-input>
     </div>
+    <div *ngIf="isEditUser">
+        <label>
+            <span>{{'user-details.user-form.password' | translate}}</span>
+            <input type="text" formControlName="password">
+        </label>
+        <app-invalid-input *ngIf="password.dirty && (password.errors?.password || password.status === 'VALID')" 
+        message="{{ password.status === 'VALID' ? ('user-details.user-form.messages.success' | translate)
+        : ('user-details.user-form.messages.password' | translate) }}"
+        type="{{ password.status === 'VALID' ? 'success' : 'error'}}"></app-invalid-input>
+    </div>
     <div>
         <label>
             <span>{{'user-details.user-form.age' | translate}}</span>

@@ -19,7 +19,8 @@
         "tabIn": "Edit Deteils",
         "logout": "logout",
         "output-form": {
-            "name": "name",
+            "name": "Name",
+            "password": "Password",
             "age": "Age",
             "birthday": "Birthday",
             "dateOfLogin": "Date of login",
@@ -28,6 +29,7 @@
         },
         "user-form": {
             "name": "Your name",
+            "password": "Your password",
             "age": "Your age",
             "birthday": "Your birthday",
             "dateOfLogin": "Date of login",
@@ -37,6 +39,7 @@
             "messages": {
                 "success": "OK",
                 "name": "Username must consist of one or two word with camel case sensitive",
+                "password": "Password have to contain min 3 char",
                 "existname": "This name exist already",
                 "age": "Range of numbers should from 18 till 65",
                 "dateOfBirth": "date should have format YYYY/MM/DD",
@@ -44,6 +47,11 @@
                 "information": "Field is required",
                 "dateOfNextNotif": "date should have format DD-MMM-YY"
             }
+        },
+        "user-chosen": {
+            "AddButton": "Add",
+            "DeleteButton": "Delete",
+            "EditButton": "Edit"
         }
     }
     

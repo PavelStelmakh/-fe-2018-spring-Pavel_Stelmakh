@@ -6,5 +6,6 @@ export interface User {
     dateOfBirth: string,
     dateOfFirstLogin: string,
     dateOfNextNotif: string,
-    information: string | null
+    information: string | null,
+    role: string
 }

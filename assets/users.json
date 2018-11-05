@@ -1,32 +1,46 @@
 [
   {
     "id": 1,
+    "name": "Admin",
+    "age": "19",
+    "password": "Admin",
+    "dateOfBirth": "2011-10-05T00:00:00.000Z",
+    "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
+    "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
+    "information": "I'm ADMIN",
+    "role": "admin"
+  },
+  {
+    "id": 2,
     "name": "Pasha",
     "age": "19",
     "password": "1111",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
     "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
-    "information": "meaw"
+    "information": "meaw",
+    "role": "user"
   },
   {
-    "id": 2,
+    "id": 3,
     "name": "Sasha",
     "age": "24",
     "password": "2222",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
     "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
-    "information": "meaw"
+    "information": "meaw",
+    "role": "user"
   },
   {
-    "id": 3,
+    "id": 4,
     "name": "Masha",
     "age": "20",
     "password": "3333",
     "dateOfBirth": "2011-10-05T00:00:00.000Z",
     "dateOfFirstLogin": "2011-10-05T14:48:00.000Z",
     "dateOfNextNotif": "2011-10-05T14:48:00.000Z",
-    "information": "meaw"
+    "information": "meaw",
+    "role": "user"
   }
 ]

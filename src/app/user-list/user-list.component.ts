@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from 'models/User';
 import { faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
@@ -10,6 +10,7 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  @Output() edit: EventEmitter<void> = new EventEmitter<void>();
   username: FormControl;
   faSearch: IconDefinition = faSearch;
   user: User;
@@ -50,6 +51,16 @@ export class UserListComponent implements OnInit {
         this.users = [];
       }
     );
+  }
+
+  updateUsers() {
+    this.username.setValue('');
+    this.usersService.search('all').subscribe((users: User[]) => this.users = users);
+  }
+
+  editUser(user: User) {
+    this.usersService.userEditSubject.next(user);
+    this.edit.emit();
   }
 
 }
