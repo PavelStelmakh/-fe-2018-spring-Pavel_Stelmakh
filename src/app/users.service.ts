@@ -10,31 +10,27 @@ import { User } from 'models/User';
 })
 export class UsersService implements OnDestroy {
   private id: number;
-  readonly userSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
-  readonly userEditSubject: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
   readonly spinner: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, @Inject(BASE_URL) private url: string) { }
+  constructor(private http: HttpClient, @Inject(BASE_URL) private url: string) {}
 
   setId(id: number) {
     this.id = id;
   }
 
   getUser() {
-    this.userSubject.next({} as User);
     this.spinner.next(true);
-    this.http.get(`${this.url}/users/${this.id}`, {
+    return this.http.get(`${this.url}/users/${this.id}`, {
       observe: 'response',
       withCredentials: true
-    }).subscribe(result => {
-      this.spinner.next(false);
-      this.userSubject.next(result.body as User);
-    });
+    })
+    .pipe(
+      tap(() => this.spinner.next(false))
+    );
   }
 
   logout() {
     this.setId(0);
-    this.userSubject.next({} as User);
   }
 
   checkExistName(name: string, id?: number) {
@@ -50,14 +46,7 @@ export class UsersService implements OnDestroy {
     return this.http.put(`${this.url}/users/${idUser}`, data, {
       observe: 'response',
       withCredentials: true
-    })
-    .pipe(
-      tap((response) => {
-        if (response.status === 200 && id === this.id) {
-          this.userSubject.next(data);
-        }
-      })
-    );
+    });
   }
 
   addUser(data: User) {
@@ -68,8 +57,6 @@ export class UsersService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubject.complete();
-    this.userEditSubject.complete();
     this.spinner.complete();
   }
 

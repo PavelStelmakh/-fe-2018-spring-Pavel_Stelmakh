@@ -1,8 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { User } from 'models/User';
 import { faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
-import { UsersService } from '../users.service';
+import { skip } from 'rxjs/operators';
+import * as usersAction from '../actions/users.action';
+import * as usersReducer from '../reducers/users.reducer';
+
 
 @Component({
   selector: 'app-user-list',
@@ -13,53 +17,60 @@ export class UserListComponent implements OnInit {
   @Output() edit: EventEmitter<void> = new EventEmitter<void>();
   username: FormControl;
   faSearch: IconDefinition = faSearch;
-  user: User;
   users: User[];
   expand: boolean;
   focus: boolean;
   notFound: boolean;
 
-  constructor(private usersService: UsersService) { }
+  constructor(private store: Store<usersReducer.State>) {}
 
   ngOnInit() {
+    this.users = [];
     this.username = new FormControl('');
     this.focus = false;
+    this.store.pipe(select(usersReducer.getUsersArray), skip(1)).subscribe(
+      (users: User[]) => {
+        this.users = users;
+        if (users.length === 0) {
+          this.notFound = true;
+        } 
+      }
+    );
   }
 
   selectUser(user: User) {
-    this.user = user;
+    this.store.dispatch(new usersAction.SelectUserAction(user.id));
     this.focus = false;
   }
 
   focusInput() {
     this.notFound = false;
-    this.users = [];
     this.focus = true;
-    this.usersService.search('all').subscribe((users: User[]) => this.users = users);
+    if(this.users.length === 0) {
+      this.store.dispatch(new usersAction.LoadUsersAction('all'));
+    }
+  }
+
+  blurInput() {
+    setTimeout(() => this.focus = false, 100);
   }
 
   expandList(expand: boolean) {
+    this.focus = false;
     this.expand = expand;
     this.username.setValue('');
   }
 
   searchUsers() {
-    this.usersService.search(this.username.value).subscribe(
-      (users: User[]) => this.users = users,
-      () => {
-        this.notFound = true;
-        this.users = [];
-      }
-    );
+    this.store.dispatch(new usersAction.LoadUsersAction(this.username.value));
   }
 
   updateUsers() {
     this.username.setValue('');
-    this.usersService.search('all').subscribe((users: User[]) => this.users = users);
+    this.users = [];
   }
 
-  editUser(user: User) {
-    this.usersService.userEditSubject.next(user);
+  editUser() {
     this.edit.emit();
   }
 

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { Store, select } from '@ngrx/store';
 
 import { HttpLoaderFactory } from '../shared/HttpLoaderFactory';
 import { UserListModule } from '../user-list/user-list.module';
@@ -12,7 +13,7 @@ import { BASE_URL } from '../url.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { InvalidInputComponent } from './invalid-input/invalid-input.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import * as language from '../reducers/language.reducer';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient, BASE_URL]
-      }
+      },
+      isolate: true
     }),
     UserListModule,
     TreeModule
@@ -44,10 +46,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 })
 export class UserDetailsModule {
 
-  constructor(private translate: TranslateService) {
-    // translate.addLangs(['en', 'ru']);
-    translate.setDefaultLang('en');
-    // translate.use('en');
+  constructor(private translate: TranslateService, private store: Store<language.State>) {
+    store.pipe(select(language.getLang)).subscribe((lang: string) => translate.use(lang));
   }
 
  }

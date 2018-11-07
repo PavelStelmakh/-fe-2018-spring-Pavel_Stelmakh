@@ -5,6 +5,11 @@ import { UsersService } from '../../users.service';
 import { User } from 'models/User';
 import { PopupService } from '../../popup/popup.service';
 import * as moment  from 'moment';
+import { Store, select } from '@ngrx/store';
+import * as usersAction from '../../actions/users.action';
+import * as usersReducer from '../../reducers/users.reducer';
+import * as profileAction from '../../actions/profile.action';
+import * as profileReducer from '../../reducers/profile.reduser';
 
 @Component({
   selector: 'app-user-form',
@@ -21,7 +26,9 @@ export class UserFormComponent implements OnInit {
   constructor(
     private builder: FormBuilder, 
     private user: UsersService,
-    private popup: PopupService
+    private popup: PopupService,
+    private storeUsers: Store<usersReducer.State>,
+    private storeProfile: Store<profileReducer.State>
     ) {}
 
   ngOnInit() {
@@ -36,9 +43,9 @@ export class UserFormComponent implements OnInit {
       dateOfNextNotif: ['', [Validators.required, dateValidator('DD-MMM-YY')]]
     });
     if (!this.isEditUser) {
-      this.user.userSubject.subscribe((value: User) => this.setFormValue(value));
+      this.storeProfile.pipe(select(profileReducer.getProfileUser)).subscribe((value: User) => this.setFormValue(value));
     } else {
-      this.user.userEditSubject.subscribe((value: User) => this.setFormValue(value));
+      this.storeUsers.pipe(select(usersReducer.getSelectedUser)).subscribe((value: User) => this.setFormValue(value));
     }
   }
 
@@ -71,30 +78,26 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.isCreateNewUser) { 
-      this.user.update(this.userForm.value, this.id).subscribe(result => {
-        if (result.status === 200) {
-          this.popup.show();
-          if (!this.isEditUser) {
-            this.update.emit(0);
-            this.user.getUser();
-          } else {
-            this.update.emit(1);
-          }        
-        }
-      });
+    const value: User = this.userForm.value;
+    if (!this.isCreateNewUser) {
+      value.id = this.id;
+      this.popup.show();
+      if (!this.isEditUser) {
+        this.update.emit(0);
+        this.storeProfile.dispatch(new profileAction.EditProfileAction(value));
+      } else {
+        this.update.emit(1);
+        this.storeUsers.dispatch(new usersAction.EditUserAction(value));
+      } 
     } else {
-      this.user.addUser(this.userForm.value).subscribe(result => {
-        if (result.status === 200) {
-          this.popup.show();
-          this.update.emit(1);       
-        }
-      });
+      this.storeUsers.dispatch(new usersAction.AddUserAction(value));
+      this.popup.show();
+      this.update.emit(1); 
     }
   }
 
   setFormValue(value: User) {
-    if (value.id) {
+    if (value) {
       this.isCreateNewUser = false;
       this.id = value.id;
       this.name.setAsyncValidators([usernameValidator(), checkExistNameValidator(this.user, false, this.id)]);

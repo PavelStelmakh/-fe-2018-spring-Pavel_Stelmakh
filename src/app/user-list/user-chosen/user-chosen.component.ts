@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { User } from 'models/User';
 import { faCaretDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { UsersService } from '../../users.service';
 import { PopupService } from 'src/app/popup/popup.service';
+import * as usersAction from '../../actions/users.action';
+import * as usersReducer from '../../reducers/users.reducer';
 
 @Component({
   selector: 'app-user-chosen',
@@ -10,21 +12,22 @@ import { PopupService } from 'src/app/popup/popup.service';
   styleUrls: ['./user-chosen.component.scss']
 })
 export class UserChosenComponent implements OnInit {
-  @Input() user: User;
+  user: User;
   faCaretDown: IconDefinition = faCaretDown;
   expand: boolean;
   @Output('expand') expandEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() delete: EventEmitter<void> = new EventEmitter<void>();
-  @Output() edit: EventEmitter<User> = new EventEmitter<User>();
+  @Output() edit: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
-    private usersService: UsersService,
-    private popup: PopupService
+    private popup: PopupService,
+    private store: Store<usersReducer.State>
   ) {}
 
   ngOnInit() {
     this.expand = false;
     this.expandEvent.emit(this.expand);
+    this.store.pipe(select(usersReducer.getSelectedUser)).subscribe((user: User) => this.user = user);
   }
 
   expandList() {
@@ -33,22 +36,20 @@ export class UserChosenComponent implements OnInit {
   }
 
   deleteUser() {
-    this.usersService.deleteUser(this.user.id).subscribe(
-      () => {
-        this.user = null;
-        this.popup.show();
-        this.delete.emit();
-      },
-      () => alert('unknown error')
-    );
+    this.store.dispatch(new usersAction.DeleteUserAction(this.user.id));
+    this.user = null;
+    this.popup.show();
+    this.delete.emit();
   }
 
-  editUser() {
-    this.edit.emit(this.user);
+  editUser() {    
+    this.store.dispatch(new usersAction.SelectUserAction(this.user.id));
+    this.edit.emit();
   }
 
   addUser() {
-    this.edit.emit({} as User);
+    this.store.dispatch(new usersAction.SelectUserAction(null));
+    this.edit.emit();
   }
 
 }

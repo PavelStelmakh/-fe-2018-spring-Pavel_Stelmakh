@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
+import { Store } from '@ngrx/store';
+import * as profileReducer from '../reducers/profile.reduser';
+import * as profileAction from '../actions/profile.action';
 
 @Component({
   selector: 'app-user-details',
@@ -16,19 +19,21 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private router: Router,
-    private userService: UsersService
+    private userService: UsersService,
+    private store: Store<profileReducer.State>
     ) {}
 
   ngOnInit() {
     this.isEditUsers = false;
     this.select = 0;
-    this.userService.getUser();
+    this.store.dispatch(new profileAction.LoadProfileAction());
   }
 
   logout() {
     this.auth.logout().subscribe(result => {
       if (result.status === 200) {
         this.userService.logout();
+        this.store.dispatch(new profileAction.SetIdAction(null));
         this.router.navigate(['/login']);
       }
     },

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../users.service';
 import { User } from 'models/User';
 import * as moment  from 'moment';
+import { Store, select } from '@ngrx/store';
+import * as profileReducer from '../../reducers/profile.reduser';
 
 @Component({
   selector: 'app-output-form',
@@ -11,12 +12,12 @@ import * as moment  from 'moment';
 export class OutputFormComponent implements OnInit {
   formValue: User;
 
-  constructor(private user: UsersService) { }
+  constructor(private store: Store<profileReducer.State>) { }
 
   ngOnInit() {
-    this.user.userSubject.subscribe((value: User) => {
-      this.formValue = value;
-      if (value.id) {
+    this.store.pipe(select(profileReducer.getProfileUser)).subscribe((value: User) => {
+      this.formValue = value || {} as User;
+      if (value) {
         const dateOfNextNotif = moment(value.dateOfNextNotif).utcOffset('+04:00').format('DD-MMM-YY');
         this.formValue.dateOfBirth = moment(value.dateOfBirth).utcOffset('+04:00').format('YYYY/MM/DD');
         this.formValue.dateOfFirstLogin = moment(value.dateOfFirstLogin).utcOffset('+04:00').format('DD MMMM YYYY');
