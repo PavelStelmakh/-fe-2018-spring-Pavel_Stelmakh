@@ -1,30 +1,34 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { List, Map } from 'immutable';
 import * as profile from '../actions/profile.action';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 
 export interface State {
     id: number | null;
     user: User | null;
 }
 
-export const initialState: State = {
+export const initialState = {
     id: null,
     user: null
 };
 
-export function reducer(state: State = initialState, action: profile.Action) {
+export function reducer(state = initialState, action: profile.Action) {
     switch(action.type) {
         case profile.SET_ID: {
+            const stateImmutable = Map(state);
             const id: number = (action as profile.SetIdAction).id;            
-            return {id, user: null};
+            return stateImmutable.set('id', id).set('user', null).toJS();
         }
         case profile.LOAD_PROFILE_SUCCESS: {
-            const user: User = (action as profile.LoadProfileSuccessAction).user;            
-            return {id: state.id, user};
+            const stateImmutable = Map(state);
+            const user: User = (action as profile.LoadProfileSuccessAction).user;    
+            return stateImmutable.set('user', user).toJS();
         }
         case profile.EDIT_PROFILE_SUCCESS: {
+            const stateImmutable = Map(state);
             const user: User = (action as profile.EditProfileSuccessAction).user;            
-            return {id: state.id, user};
+            return stateImmutable.set('user', user).toJS();
         }        
         default: {
             return state;

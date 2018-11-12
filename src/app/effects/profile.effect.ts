@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 import * as profile from '../actions/profile.action';
 import { UsersService } from '../users.service';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 
 @Injectable()
 export class ProfileEffect {
@@ -20,7 +20,7 @@ export class ProfileEffect {
     .pipe(
         mergeMap(() => this.usersService.getUser()
         .pipe(
-            map((result) => new profile.LoadProfileSuccessAction(result.body as User))
+            map(result => new profile.LoadProfileSuccessAction(result.body as User)),
         ))
     );
 

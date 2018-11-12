@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFormComponent renders markup to snapshot 1`] = `
+<app-user-form
+  builder={[Function FormBuilder]}
+  id="undefined"
+  isCreateNewUser="false"
+  popup={[Function PopupService]}
+  storeProfile={[Function Object]}
+  storeUsers={[Function Object]}
+  update={[Function EventEmitter]}
+  user={[Function UsersService]}
+  userForm={[Function FormGroup]}
+>
+  <form
+    class="ng-untouched ng-pristine ng-invalid"
+    ng-reflect-form="[object Object]"
+    novalidate=""
+  >
+    <div>
+      <label>
+        <span>
+          Your name
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-invalid"
+          formcontrolname="name"
+          ng-reflect-name="name"
+          placeholder="Anna Maria"
+          type="text"
+        />
+      </label>
+      
+      
+      
+    </div>
+    
+    <div>
+      <label>
+        <span>
+          Your age
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-invalid"
+          formcontrolname="age"
+          ng-reflect-name="age"
+          placeholder="18-65"
+          type="text"
+        />
+      </label>
+      
+    </div>
+    <div>
+      <label>
+        <span>
+          Your birthday
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-valid"
+          formcontrolname="dateOfBirth"
+          ng-reflect-name="dateOfBirth"
+          placeholder="YYYY/MM/DD"
+          type="text"
+        />
+      </label>
+      
+    </div>
+    <div>
+      <label>
+        <span>
+          Date of login
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-valid"
+          formcontrolname="dateOfFirstLogin"
+          ng-reflect-name="dateOfFirstLogin"
+          placeholder="DD MMMM YYYY"
+          type="text"
+        />
+      </label>
+      
+    </div>
+    <div>
+      <label>
+        <span>
+          Information
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-invalid"
+          formcontrolname="information"
+          ng-reflect-name="information"
+          type="text"
+        />
+      </label>
+      
+    </div>
+    <div>
+      <label>
+        <span>
+          Date of notification
+        </span>
+        <input
+          class="ng-untouched ng-pristine ng-valid"
+          formcontrolname="dateOfNextNotif"
+          ng-reflect-name="dateOfNextNotif"
+          placeholder="DD-MMM-YY"
+          type="text"
+        />
+      </label>
+      
+    </div>
+    <input
+      disabled=""
+      type="submit"
+      value="send request"
+    />
+  </form>
+</app-user-form>
+`;

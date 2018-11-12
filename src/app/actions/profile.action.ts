@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 
 export const SET_ID = '[PROFILE] Set Id';
 export const LOAD_PROFILE = '[PROFILE] Load Profile';

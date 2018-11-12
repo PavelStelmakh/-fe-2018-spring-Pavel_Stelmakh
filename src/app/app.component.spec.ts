@@ -1,27 +1,68 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { RouterTestingModule } from "@angular/router/testing";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
+import { Observable, of } from 'rxjs';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { hot } from 'jasmine-marbles';
+import * as langReducer from './reducers/language.reducer';
+
+const translations = {
+  "title": "Angular training",
+  "login": {
+    "login": "login"
+  } 
+};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<{}> {
+    return of(translations);
+  }
+}
+
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let translate: TranslateService;
+  let store: Store<langReducer.State>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader}
+        })
+      ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        {
+          provide: Store,
+          useValue: {
+            dispatch: jest.fn(),
+            pipe: jest.fn(() => hot('-a', { a: 'en' }))
+          }
+        }
+      ],
+      schemas: [
+       NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
+
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'training-app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('training-app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    translate = TestBed.get(TranslateService);
+    store = TestBed.get(Store);
+  });
+
+  it('renders markup to snapshot', () => {
+    translate.use('en');
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to training-app!');
-  }));
+    expect(fixture).toMatchSnapshot();
+  });
+
 });

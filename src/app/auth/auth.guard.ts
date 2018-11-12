@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route, CanActivate } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { mergeMap, take, catchError, tap } from 'rxjs/operators';
+import { mergeMap, take, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as profileAction from '../actions/profile.action';
 import * as profileReducer from '../reducers/profile.reduser';
@@ -21,7 +21,7 @@ export class AuthGuard implements CanLoad, CanActivate {
       const {path} = route;
       return this.authService.checkLogin().pipe(
         take(1),
-        mergeMap((result) => {
+        mergeMap(result => {
           if (result.body['role'] === 'admin') {
             this.store.dispatch(new profileAction.SetIdAction(+result.body['id']));
             if (path === 'admin') {
@@ -71,4 +71,5 @@ export class AuthGuard implements CanLoad, CanActivate {
       })
     );
   }
+
 }

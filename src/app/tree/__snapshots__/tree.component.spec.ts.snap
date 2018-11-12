@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeComponent renders markup to snapshot 1`] = `
+<app-tree
+  treeService={[Function TreeService]}
+>
+  <input
+    placeholder="path"
+    type="text"
+  /><br /><input
+    placeholder="search"
+    type="text"
+  /><br /><button>
+    search
+  </button><button>
+    reset tree
+  </button><div>
+    
+  </div>
+</app-tree>
+`;

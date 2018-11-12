@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserDetailsComponent renders markup to snapshot 1`] = `
+<app-user-details
+  auth={[Function AuthService]}
+  isEditUsers="false"
+  router={[Function Router]}
+  select="0"
+  store={[Function Object]}
+  userService={[Function UsersService]}
+>
+  <div
+    class="tabs"
+    ng-reflect-ng-class="[object Object]"
+  >
+    <div
+      class="selectTabFirst select"
+      ng-reflect-ng-class="[object Object]"
+    >
+      user-details.tabOut
+    </div>
+    
+    <div
+      class="selectTabThrid"
+      ng-reflect-ng-class="[object Object]"
+    >
+      user-details.tabIn
+    </div>
+  </div><div
+    class="tabsView"
+    ng-reflect-ng-switch="0"
+  >
+    
+    <app-output-form />
+    
+    
+  </div><input
+    type="button"
+    value="user-details.logout"
+  />
+</app-user-details>
+`;

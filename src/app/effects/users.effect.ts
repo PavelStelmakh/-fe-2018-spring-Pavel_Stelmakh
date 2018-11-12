@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, switchMap, map, catchError } from 'rxjs/operators';
 import * as users from '../actions/users.action';
 import { UsersService } from '../users.service';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 
 @Injectable()
 export class UsersEffect {
@@ -17,7 +17,7 @@ export class UsersEffect {
     .pipe(
         mergeMap((action: users.AddUserAction) => this.usersService.addUser(action.user)
         .pipe(
-            map(() => new users.AddUserSuccessAction(action.user))
+            map((response) => new users.AddUserSuccessAction(response.body as User))
         ))
     );
 

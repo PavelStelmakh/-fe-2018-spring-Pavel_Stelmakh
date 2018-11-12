@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { User } from 'models/User';
+import { User } from '../../../../models/User';
 import { faCaretDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { PopupService } from 'src/app/popup/popup.service';
+import { PopupService } from '../../popup/popup.service';
 import * as usersAction from '../../actions/users.action';
 import * as usersReducer from '../../reducers/users.reducer';
 

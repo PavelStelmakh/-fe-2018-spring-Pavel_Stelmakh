@@ -6,14 +6,15 @@ export interface State {
     lang: string;
 }
 
-export const initialState: State = {
+export const initialState = {
     lang: 'en'
 };
 
-export function reducer(state: State = initialState, action: language.Action): State {
+export function reducer(state = initialState, action: language.Action) {
     switch(action.type) {
         case language.SELECT_LANG: {
-            return Map(fromJS(state)).set('lang', action.lang).toJS() as State;
+            const stateImmutable = Map(state);
+            return stateImmutable.set('lang', action.lang).toJS();
         }
         default: {
             return state;

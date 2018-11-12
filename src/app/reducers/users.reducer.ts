@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { List, Map } from 'immutable';
+import { Map, List } from 'immutable';
 import * as users from '../actions/users.action';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 
 export interface State {
     ids: number[],
@@ -9,61 +9,46 @@ export interface State {
     selected: number | null
 }
 
-export const initialState: State = {
+export const initialState = {
     ids: [],
     users: {},
     selected: null
 };
 
-export function reducer(state: State = initialState, action: users.Action) {
+export function reducer(state = initialState, action: users.Action) {
     switch(action.type) {
         case users.ADD_USER_SUCCESS: {
+            const stateImmutable = Map(state);
             const user: User = (action as users.AddUserSuccessAction).user;
-            const ids = List(state.ids).push(user.id).toJS();
-            const users = Map(state.users).set(`${user.id}`, user).toJS();
-            return {
-                ids,
-                users,
-                selected: state.selected
-            }
+            return stateImmutable
+            .updateIn(['ids'], ids => List(ids).push(user.id).toJS())
+            .updateIn(['users'], users => Map(users).set(user.id, user).toJS()).toJS();
         }
         case users.EDIT_USER_SUCCESS: {
+            const stateImmutable = Map(state);
             const user: User = (action as users.EditUserSuccessAction).user;
-            const users = Map(state.users).set(`${user.id}`, user).toJS();
-            return {
-                ids: state.ids,
-                users,
-                selected: state.selected
-            }
+            return stateImmutable.updateIn(['users'], users => Map(users).set(user.id, user).toJS()).toJS();
         }
         case users.DELET_USER: {
+            const stateImmutable = Map(state);
             const idUser: number = (action as users.DeleteUserAction).id;
-            const ids = List(state.ids).filter((id: number) => id !== idUser);
-            const users = Map(state.users).delete(`${idUser}`).toJS();
-            return {
-                ids,
-                users,
-                selected: state.selected === idUser ? null : state.selected
-            }
+            return stateImmutable
+            .updateIn(['ids'], ids => ids.filter((id: number) => id !== idUser))
+            .updateIn(['users'], users => Map(users).delete(`${idUser}`).toJS())            
+            .updateIn(['selected'], (selected: number | null) => selected === idUser ? null : selected).toJS();
         }
         case users.LOAD_USERS_SUCCESS: {
+            const stateImmutable = Map(state);
             const usersArray: User[] = (action as users.LoadUsersSuccessAction).users;
-            const ids: number[] = List(usersArray).map((user: User) => user.id).toJS();
+            const ids: number[] = usersArray.map((user: User) => user.id);
             const users: {[key: number]: User} = {};
             ids.forEach((id: number, index: number) => users[id] = usersArray[index]);
-            return {
-                ids,
-                users,
-                selected: null
-            }
+            return stateImmutable.set('ids', ids).set('users', users).set('selected', null).toJS();
         }
         case users.SELECT_USER: {
+            const stateImmutable = Map(state);
             const idUser: number = (action as users.SelectUserAction).id;
-            return {
-                ids: state.ids,
-                users: state.users,
-                selected: idUser
-            }
+            return stateImmutable.set('selected', idUser).toJS();
         }
         default: {
             return state;

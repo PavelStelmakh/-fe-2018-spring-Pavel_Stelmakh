@@ -60,15 +60,11 @@ router.get('/users/:id', (req: Request, res: Response) => {
 
 router.post('/users/add', (req: Request, res: Response) => {
     try {
-        const success: boolean = users.add(req.body);
-        if (success) {
-            res.status(200);
-        } else {
-            res.status(418);
-        }
+        const user: User = users.add(req.body);
+        res.status(200).send(user);
     }
     catch (Error) {
-        res.status(500);
+        res.status(418);
     }
     res.end();
 });

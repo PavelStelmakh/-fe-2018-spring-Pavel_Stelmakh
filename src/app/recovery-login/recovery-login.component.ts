@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { Recovery } from 'models/Recovery';
+import { Recovery } from '../../../models/Recovery';
 import { dateValidator, checkExistNameValidator } from '../validators';
 import { UsersService } from '../users.service';
 

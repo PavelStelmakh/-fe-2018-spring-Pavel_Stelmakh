@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserDropdownItemComponent renders markup to snapshot 1`] = `
+<app-user-dropdown-item
+  user={[Function Object]}
+>
+  <div>
+    <div>
+      <span>
+        Name:
+      </span>
+      <span>
+        Pasha
+      </span>
+    </div>
+    <div>
+      <span>
+        Age:
+      </span>
+      <span>
+        19
+      </span>
+    </div>
+    <div>
+      <span>
+        Birthday:
+      </span>
+      <span>
+        2011/10/05
+      </span>
+    </div>
+    <div>
+      <span>
+        Date of login:
+      </span>
+      <span>
+        05 October 2011
+      </span>
+    </div>
+    <div>
+      <span>
+        Information:
+      </span>
+      <span>
+        meaw
+      </span>
+    </div>
+    <div>
+      <span>
+        Date of notification:
+      </span>
+      <span>
+        05-Oct-11
+      </span>
+    </div>
+  </div>
+</app-user-dropdown-item>
+`;

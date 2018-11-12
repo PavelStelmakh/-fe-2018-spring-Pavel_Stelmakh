@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { User } from 'models/User';
+import { User } from '../../../models/User';
 import { faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
 import { skip } from 'rxjs/operators';
 import * as usersAction from '../actions/users.action';
 import * as usersReducer from '../reducers/users.reducer';
-
 
 @Component({
   selector: 'app-user-list',
@@ -21,15 +20,20 @@ export class UserListComponent implements OnInit {
   expand: boolean;
   focus: boolean;
   notFound: boolean;
+  updateListUsers: boolean;
 
   constructor(private store: Store<usersReducer.State>) {}
 
   ngOnInit() {
     this.users = [];
+    this.updateListUsers = true;
     this.username = new FormControl('');
     this.focus = false;
     this.store.pipe(select(usersReducer.getUsersArray), skip(1)).subscribe(
       (users: User[]) => {
+        if (this.users.length !== users.length) {
+          this.updateListUsers = true;
+        }
         this.users = users;
         if (users.length === 0) {
           this.notFound = true;
@@ -46,13 +50,11 @@ export class UserListComponent implements OnInit {
   focusInput() {
     this.notFound = false;
     this.focus = true;
-    if(this.users.length === 0) {
+    if(this.updateListUsers) {
+      this.users = [];
       this.store.dispatch(new usersAction.LoadUsersAction('all'));
+      this.updateListUsers = false;
     }
-  }
-
-  blurInput() {
-    setTimeout(() => this.focus = false, 100);
   }
 
   expandList(expand: boolean) {

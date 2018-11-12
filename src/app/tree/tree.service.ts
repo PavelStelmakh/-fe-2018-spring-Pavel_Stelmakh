@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import getTreeItems from 'shared/getTreeItems';
+import getTreeItems from '../../../shared/getTreeItems';
 
 @Injectable({
   providedIn: 'root'

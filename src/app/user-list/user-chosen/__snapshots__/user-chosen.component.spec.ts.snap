@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserChosenComponent renders markup to snapshot 1`] = `
+<app-user-chosen
+  delete={[Function EventEmitter]}
+  edit={[Function EventEmitter]}
+  expand="false"
+  expandEvent={[Function EventEmitter]}
+  faCaretDown={[Function Object]}
+  popup={[Function PopupService]}
+  store={[Function Object]}
+  user={[Function Object]}
+>
+  <div
+    class="chosen"
+  >
+    <div>
+      <div>
+        <span>
+          Name:
+        </span>
+        <span>
+          
+        </span>
+      </div>
+      <div>
+        <span>
+          Age:
+        </span>
+        <span>
+          
+        </span>
+      </div>
+      <div>
+        <span>
+          Information:
+        </span>
+        <span>
+          
+        </span>
+      </div>
+    </div>
+    <div>
+      <fa-icon
+        size="3x"
+        style="color: #ccc"
+      />
+    </div>
+  </div><div
+    class="buttons"
+  >
+    <button>
+      Delete
+    </button>
+    <button>
+      Edit
+    </button>
+    <button>
+      Add
+    </button>
+  </div>
+</app-user-chosen>
+`;

@@ -1,25 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { PopupComponent } from './popup.component';
+import { PopupService } from './popup.service';
 
 describe('PopupComponent', () => {
-  let component: PopupComponent;
   let fixture: ComponentFixture<PopupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopupComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        PopupComponent
+      ],
+      providers: [
+        PopupService
+      ],
+      schemas: [
+       NO_ERRORS_SCHEMA
+      ]
+    }).compileComponents();
+
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PopupComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('renders markup to snapshot', () => {
+    expect(fixture).toMatchSnapshot();
   });
+
 });

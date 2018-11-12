@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeItemComponent renders markup to snapshot 1`] = `
+<app-tree-item
+  cdr={[Function ViewRef_]}
+  expandItem="false"
+  faCaretDown={[Function Object]}
+  faCaretLeft={[Function Object]}
+  itemComponents={[Function QueryList]}
+  items={[Function Array]}
+  path={[Function Array]}
+  treeService={[Function TreeService]}
+>
+  <div>
+    <div>
+      <fa-icon
+        size="1x"
+        style="color: #ccc"
+      />
+    </div>
+    <span>
+      
+    </span>
+  </div>
+</app-tree-item>
+`;

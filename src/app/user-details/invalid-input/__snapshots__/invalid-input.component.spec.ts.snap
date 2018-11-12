@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvalidInputComponent renders markup to snapshot 1`] = `
+<app-invalid-input
+  message={[Function String]}
+>
+  <div
+    class="undefined"
+  >
+     Username must consist of one or two word with camel case sensitive
+  
+  </div>
+</app-invalid-input>
+`;

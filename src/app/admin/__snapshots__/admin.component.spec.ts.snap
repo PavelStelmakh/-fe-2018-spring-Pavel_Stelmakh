@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminComponent renders markup to snapshot 1`] = `
+<app-admin>
+  <app-user-details />
+</app-admin>
+`;

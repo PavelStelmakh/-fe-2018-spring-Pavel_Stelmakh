@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'models/User';
+import { User } from '../../../../models/User';
 import * as moment  from 'moment';
 import { Store, select } from '@ngrx/store';
 import * as profileReducer from '../../reducers/profile.reduser';

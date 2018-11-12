@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'models/User';
+import { User } from '../../../../models/User';
 import * as moment  from 'moment';
 
 @Component({

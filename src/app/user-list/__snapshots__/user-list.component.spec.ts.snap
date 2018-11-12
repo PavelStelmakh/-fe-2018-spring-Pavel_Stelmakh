@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListComponent renders markup to snapshot with empty array of users 1`] = `
+<app-user-list
+  edit={[Function EventEmitter]}
+  expand={[Function Boolean]}
+  faSearch={[Function Object]}
+  focus="false"
+  store={[Function Object]}
+  updateListUsers={[Function Boolean]}
+  username={[Function FormControl]}
+  users={[Function Array]}
+>
+  <app-user-chosen /><div>
+    <input
+      class="ng-untouched ng-pristine ng-valid"
+      ng-reflect-form="[object Object]"
+      placeholder="search by name"
+      type="text"
+    />
+    <div
+      class="iconSearch"
+    >
+      <fa-icon
+        size="1x"
+        style="color: #ccc"
+      />
+    </div>
+    
+  </div>
+</app-user-list>
+`;

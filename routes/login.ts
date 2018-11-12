@@ -16,6 +16,7 @@ router.get('', function (req: Request, res: Response) {
         res.status(401);
     }
     res.end();
+    
 });
 
 router.get('/find/:name/:id', function (req: Request, res: Response) {
@@ -23,7 +24,7 @@ router.get('/find/:name/:id', function (req: Request, res: Response) {
     const id: number = +req.params['id'];
 
     setTimeout(() => {
-        if (id !== 0 && users.user(id).name === name) {
+        if (id !== 0 && users.user(id) && users.user(id).name === name) {
             res.status(200);
         } else if (!users.checkExistName(name)) {
             res.status(200);

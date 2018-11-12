@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutputFormComponent renders markup to snapshot 1`] = `
+<app-output-form
+  store={[Function Object]}
+>
+  <div>
+    <div>
+      <span>
+        Name:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+    <div>
+      <span>
+        Age:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+    <div>
+      <span>
+        Birthday:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+    <div>
+      <span>
+        Date of login:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+    <div>
+      <span>
+        Information:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+    <div>
+      <span>
+        Date of notification:
+      </span>
+      <span>
+        
+      </span>
+    </div>
+  </div>
+</app-output-form>
+`;

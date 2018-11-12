@@ -79,8 +79,8 @@ class Users {
         }
     }
 
-    add(data: User): boolean {
-        if (!data || !this.check(data)) return false;
+    add(data: User): User {
+        if (!data || !this.check(data)) throw Error();
         let id: number;
         if (this._users.length == 0) {
             id = 1;
@@ -91,7 +91,7 @@ class Users {
         data.id = id;
         data.role = 'user';
         this._users.push({...data});
-        return true;
+        return data;
     }
 
     delete(id: number): boolean {

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecoveryLoginComponent renders markup to snapshot 1`] = `
+<app-recovery-login
+  auth={[Function AuthService]}
+  builder={[Function FormBuilder]}
+  recoveryForm={[Function FormGroup]}
+  router={[Function Router]}
+  usersService={[Function UsersService]}
+  wrongData="false"
+>
+  <form
+    class="ng-untouched ng-pristine ng-invalid"
+    ng-reflect-form="[object Object]"
+    novalidate=""
+  >
+    <div
+      class="messages"
+    >
+      
+      
+      
+      
+    </div>
+    <input
+      class="ng-untouched ng-pristine ng-invalid"
+      formcontrolname="login"
+      ng-reflect-name="login"
+      placeholder="login"
+      type="text"
+    />
+    <input
+      class="ng-untouched ng-pristine ng-invalid"
+      formcontrolname="birthday"
+      ng-reflect-name="birthday"
+      placeholder="date of birthday (YYYY/MM/DD)"
+      type="text"
+    />
+    <input
+      class="ng-untouched ng-pristine ng-invalid"
+      formcontrolname="password"
+      ng-reflect-name="password"
+      placeholder="new password"
+      type="password"
+    />
+    <div
+      class="recovery"
+    >
+      <input
+        disabled=""
+        type="submit"
+        value="recovery"
+      />
+      <a
+        href="/login"
+        ng-reflect-router-link="/login"
+        routerlink="/login"
+      >
+        back
+      </a>
+    </div>
+  </form>
+</app-recovery-login>
+`;

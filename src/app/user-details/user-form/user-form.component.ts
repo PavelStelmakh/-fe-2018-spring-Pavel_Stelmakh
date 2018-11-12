@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { usernameValidator, userageValidator, dateValidator, checkExistNameValidator } from '../../validators';
 import { UsersService } from '../../users.service';
-import { User } from 'models/User';
+import { User } from '../../../../models/User';
 import { PopupService } from '../../popup/popup.service';
 import * as moment  from 'moment';
 import { Store, select } from '@ngrx/store';
